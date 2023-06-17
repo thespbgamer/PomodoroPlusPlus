@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<title>Main Page</title>
+		<meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
+		<link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css" />
+		<link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css" />
+		<link rel="stylesheet" type="text/css" href="./assets/css/styles.css" />
+	</head>
+	<body id="bodyColor" data-bs-theme="dark">
+		<nav class="navbar fixed-bottom nav-underline">
+			<div class="container-fluid">
+				<a class="navbar-brand active" href="#"><i class="bi bi-house-fill"></i></a>
+				<a class="navbar-brand" href="options.html"><i class="bi bi-gear-fill"></i></a>
+			</div>
+		</nav>
+		<div class="container mt-2">
+			<div class="row">
+				<div class="d-flex justify-content-center">
+					<h1 class="fw-bold">Pomodoro++</h1>
+				</div>
+			</div>
+			<br />
+			<div class="row">
+				<div class="d-flex justify-content-center">
+					<h2 class="fw-bold" id="countdown">00:00:00</h2>
+				</div>
+			</div>
+			<div class="row">
+				<div class="d-flex justify-content-center">
+					<button type="button" class="btn btn-primary btn-lg" id="startButton">Start Pomodoro Session</button>
+				</div>
+			</div>
+			<script src="../node_modules/jquery/dist/jquery.js"></script>
+			<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+			<script src="./assets/js/configLoad.js"></script>
+			<script src="./assets/js/indexRenderer.js"></script>
+		</div>
+	</body>
+</html>
