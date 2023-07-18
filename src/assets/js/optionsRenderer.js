@@ -8,18 +8,43 @@ document.getElementById("toggle-dark-mode").addEventListener("click", async () =
 document.getElementById("save-options").addEventListener("click", async () => {
 	//console.log("save-options clicked");
 
-	//save in local storage the values of the options
-	let timeForPomodoroWorkingSession = document.getElementById("timeForPomodoroWorkingSession").value;
-	let timeForPomodoroRestingSession = document.getElementById("timeForPomodoroRestingSession").value;
-	let numberOfSessionsValue = document.getElementById("numberOfSessionsValue").value;
+	try {
+		//save in local storage the values of the options
+		let timeForPomodoroWorkingSession = document.getElementById("timeForPomodoroWorkingSession").value;
+		let timeForPomodoroRestingSession = document.getElementById("timeForPomodoroRestingSession").value;
+		let numberOfSessionsValue = document.getElementById("numberOfSessionsValue").value;
 
-	if (parseInt(numberOfSessionsValue == null || numberOfSessionsValue) < 1) {
-		numberOfSessionsValue = 1;
+		if (parseInt(numberOfSessionsValue == null || numberOfSessionsValue) < 1) {
+			numberOfSessionsValue = 1;
+		}
+
+		localStorage.setItem("timeForPomodoroWorkingSession", timeForPomodoroWorkingSession);
+		localStorage.setItem("timeForPomodoroRestingSession", timeForPomodoroRestingSession);
+		localStorage.setItem("numberOfSessionsValue", numberOfSessionsValue);
+
+		Toastify.toast({
+			text: "Options saved!",
+			duration: 3000,
+			close: true,
+			gravity: "bottom",
+			position: "right",
+			style: {
+				background: "linear-gradient(to right, #00b09b, #96c93d)",
+			},
+		});
+	} catch (err) {
+		console.log(err);
+		Toastify.toast({
+			text: err,
+			duration: 3000,
+			close: true,
+			gravity: "bottom",
+			position: "right",
+			style: {
+				background: "linear-gradient(to right, rgba(37,2,2,1),rgba(233,68,68,1))",
+			},
+		});
 	}
-
-	localStorage.setItem("timeForPomodoroWorkingSession", timeForPomodoroWorkingSession);
-	localStorage.setItem("timeForPomodoroRestingSession", timeForPomodoroRestingSession);
-	localStorage.setItem("numberOfSessionsValue", numberOfSessionsValue);
 });
 
 //onpageload
