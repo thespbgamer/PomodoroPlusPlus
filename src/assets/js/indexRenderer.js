@@ -1,11 +1,11 @@
-let timeLeft = 0;
-let currentTimer = "X";
+let timeLeft = -1;
+let currentActivity = "N/A";
 
 //onpageload
 window.addEventListener("load", async () => {
-	console.log("onpageload");
-	//get the values from local storage
-	toggleTimerAndTime();
+	//console.log("onpageload");
+
+	toggleCurrentActivityAndTimeLeft();
 });
 
 document.getElementById("startButton").addEventListener("click", async () => {
@@ -15,34 +15,34 @@ document.getElementById("startButton").addEventListener("click", async () => {
 
 function startCountdown() {
 	document.getElementById("startButton").setAttribute("disabled", "disabled");
-	updateCurrentSession();
-	var timeleft = localStorage.getItem("timeForPomodoroWorkingSession");
-	var downloadTimer = setInterval(function () {
+	updateCurrentSessionMessage();
+	var currentTimer = setInterval(function () {
 		//format mm:ss with allwas 2 digits
 		document.getElementById("countdown").innerHTML =
-			("0" + Math.floor(timeleft / 60)).slice(-2) + ":" + ("0" + (timeleft % 60)).slice(-2);
-		timeleft -= 1;
-		if (timeleft < 0) {
-			clearInterval(downloadTimer);
+			("0" + Math.floor(timeLeft / 60)).slice(-2) + ":" + ("0" + (timeLeft % 60)).slice(-2);
+		timeLeft -= 1;
+		if (timeLeft < 0) {
+			clearInterval(currentTimer);
 			document.getElementById("countdown").innerHTML = "Finished";
 			document.getElementById("startButton").removeAttribute("disabled");
-			toggleTimerAndTime();
-			updateCurrentSession(0, "hide");
+			toggleCurrentActivityAndTimeLeft();
+			updateCurrentSessionMessage(0, "hide");
+			startCountdown();
 		}
 	}, 1000);
 }
 
-function toggleTimerAndTime() {
-	if (currentTimer == "work") {
-		currentTimer = "rest";
+function toggleCurrentActivityAndTimeLeft() {
+	if (currentActivity == "work") {
+		currentActivity = "rest";
 		timeLeft = localStorage.getItem("timeForPomodoroRestingSession");
 	} else {
-		currentTimer = "work";
+		currentActivity = "work";
 		timeLeft = localStorage.getItem("timeForPomodoroWorkingSession");
 	}
 }
 
-function updateCurrentSession(delayInSeconds = 1, status = currentTimer) {
+function updateCurrentSessionMessage(delayInSeconds = 1, status = currentActivity) {
 	setTimeout(function () {
 		//remove text danger class
 		document.getElementById("currentSession").classList.remove("text-danger");
