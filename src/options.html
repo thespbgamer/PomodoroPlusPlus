@@ -20,11 +20,12 @@
 				</div>
 			</div>
 			<br />
-			<div>
+			<form onsubmit="return false;">
 				<div>
 					<label class="form-label">Time to Work (in seconds)</label>
 					<div class="input-group mb-3">
 						<input
+							required
 							type="number"
 							class="form-control"
 							placeholder="Time to work in seconds"
@@ -38,6 +39,7 @@
 					<label class="form-label">Time to Rest (in seconds)</label>
 					<div class="input-group mb-3">
 						<input
+							required
 							type="number"
 							class="form-control"
 							placeholder="Time to rest in seconds"
@@ -51,6 +53,7 @@
 					<label class="form-label">Number of Sessions</label>
 					<div class="input-group mb-3">
 						<input
+							required
 							type="number"
 							class="form-control"
 							placeholder="Number of sessions"
@@ -60,12 +63,15 @@
 						<span class="input-group-text" id="finalTimeConverted">N/A</span>
 					</div>
 				</div>
-			</div>
-			<div class="row">
-				<div class="d-flex justify-content-center">
-					<button class="btn btn-primary btn-lg" id="save-options"><i class="bi bi-save"></i> Save Options</button>
+				<div class="row">
+					<div class="d-flex justify-content-center">
+						<button type="submit" class="btn btn-primary btn-lg" id="save-options">
+							<i class="bi bi-save"></i> Save Options
+						</button>
+					</div>
 				</div>
-			</div>
+			</form>
+
 			<div class="row mt-2">
 				<div class="d-flex justify-content-end">
 					<button class="btn btn-secondary btn-sm" id="toggle-dark-mode">
