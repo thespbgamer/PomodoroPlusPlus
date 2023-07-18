@@ -5,12 +5,14 @@
 	"main": "main.js",
 	"scripts": {
 		"start": "electron .",
-		"dev": "npx electronmon ."
+		"dev": "npx electronmon .",
+		"build": "npx electron-packager ."
 	},
 	"author": "",
 	"license": "ISC",
 	"devDependencies": {
-		"electron": "^25.1.0"
+		"electron": "^25.1.0",
+		"electron-packager": "^17.1.1"
 	},
 	"dependencies": {
 		"@popperjs/core": "^2.11.8",

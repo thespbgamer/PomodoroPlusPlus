@@ -18,21 +18,35 @@ document.getElementById("save-options").addEventListener("click", async () => {
 			numberOfSessionsValue = 1;
 		}
 
+		if (timeForPomodoroWorkingSession == "" || timeForPomodoroRestingSession == "" || numberOfSessionsValue == "") {
+			// Toastify.toast({
+			// 	text: "Fill all the fields!",
+			// 	duration: 3000,
+			// 	close: true,
+			// 	gravity: "bottom",
+			// 	position: "right",
+			// 	style: {
+			// 		background: "linear-gradient(to right, rgba(14,0,255,1),rgba(0,232,255,1))",
+			// 	},
+			// });
+			return;
+		}
+
 		localStorage.setItem("timeForPomodoroWorkingSession", timeForPomodoroWorkingSession);
 		localStorage.setItem("timeForPomodoroRestingSession", timeForPomodoroRestingSession);
 		localStorage.setItem("numberOfSessionsValue", numberOfSessionsValue);
 
 		if (timeForPomodoroWorkingSession == "" || timeForPomodoroRestingSession == "" || numberOfSessionsValue == "") {
-			Toastify.toast({
-				text: "Fill all the fields!",
-				duration: 3000,
-				close: true,
-				gravity: "bottom",
-				position: "right",
-				style: {
-					background: "linear-gradient(to right, rgba(14,0,255,1),rgba(0,232,255,1))",
-				},
-			});
+			// Toastify.toast({
+			// 	text: "Fill all the fields!",
+			// 	duration: 3000,
+			// 	close: true,
+			// 	gravity: "bottom",
+			// 	position: "right",
+			// 	style: {
+			// 		background: "linear-gradient(to right, rgba(14,0,255,1),rgba(0,232,255,1))",
+			// 	},
+			// });
 			return;
 		}
 
