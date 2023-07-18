@@ -1,11 +1,15 @@
 let timeLeft = -1;
 let currentActivity = "N/A";
+let numberOfSessions = -1;
+let sessionsRemaining = -1;
 
 //onpageload
 window.addEventListener("load", async () => {
 	//console.log("onpageload");
 
 	toggleCurrentActivityAndTimeLeft();
+	numberOfSessions = localStorage.getItem("numberOfSessionsValue");
+	sessionsRemaining = numberOfSessions * 2;
 });
 
 document.getElementById("startButton").addEventListener("click", async () => {
@@ -14,6 +18,18 @@ document.getElementById("startButton").addEventListener("click", async () => {
 });
 
 function startCountdown() {
+	// sessions left
+	sessionsRemaining -= 1;
+
+	if (sessionsRemaining < 1) {
+		//reset sessions
+		numberOfSessionsValue = localStorage.getItem("numberOfSessionsValue");
+		document.getElementById("countdown").innerHTML = "Finished";
+		toggleCurrentActivityAndTimeLeft();
+		updateCurrentSessionMessage(0, "hide");
+		return;
+	}
+
 	document.getElementById("startButton").setAttribute("disabled", "disabled");
 	updateCurrentSessionMessage();
 	var currentTimer = setInterval(function () {
