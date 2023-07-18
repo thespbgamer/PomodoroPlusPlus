@@ -9,26 +9,40 @@ document.getElementById("save-options").addEventListener("click", async () => {
 	console.log("save-options clicked");
 
 	//save in local storage the values of the options
-	const timeForPomodoroWorkingSession = document.getElementById("timeForPomodoroWorkingSession").value;
-	const timeForPomodoroRestingSession = document.getElementById("timeForPomodoroRestingSession").value;
+	let timeForPomodoroWorkingSession = document.getElementById("timeForPomodoroWorkingSession").value;
+	let timeForPomodoroRestingSession = document.getElementById("timeForPomodoroRestingSession").value;
+	let numberOfSessionsValue = document.getElementById("numberOfSessionsValue").value;
+
+	if (parseInt(numberOfSessionsValue == null || numberOfSessionsValue) < 1) {
+		numberOfSessionsValue = 1;
+	}
 
 	localStorage.setItem("timeForPomodoroWorkingSession", timeForPomodoroWorkingSession);
 	localStorage.setItem("timeForPomodoroRestingSession", timeForPomodoroRestingSession);
+	localStorage.setItem("numberOfSessionsValue", numberOfSessionsValue);
 });
 
 //onpageload
 window.addEventListener("load", async () => {
 	//console.log("onpageload");
 	//get the values from local storage
-	const timeForPomodoroWorkingSession = localStorage.getItem("timeForPomodoroWorkingSession");
-	const timeForPomodoroRestingSession = localStorage.getItem("timeForPomodoroRestingSession");
+	let timeForPomodoroWorkingSession = localStorage.getItem("timeForPomodoroWorkingSession");
+	let timeForPomodoroRestingSession = localStorage.getItem("timeForPomodoroRestingSession");
+	let numberOfSessionsValue = localStorage.getItem("numberOfSessionsValue");
+
+	if (numberOfSessionsValue == null || parseInt(numberOfSessionsValue) < 1) {
+		numberOfSessionsValue = 1;
+	}
+	console.log(numberOfSessionsValue);
 
 	//set the values from local storage
 	document.getElementById("timeForPomodoroWorkingSession").value = timeForPomodoroWorkingSession;
 	document.getElementById("timeForPomodoroRestingSession").value = timeForPomodoroRestingSession;
+	document.getElementById("numberOfSessionsValue").value = numberOfSessionsValue;
 
 	convertTimerValues("timeForPomodoroWorkingSession", "timeToWorkConverted");
 	convertTimerValues("timeForPomodoroRestingSession", "timeToRestConverted");
+	convertTimerValues("numberOfSessionsValue", "finalTimeConverted");
 });
 
 // document.getElementById("reset-to-system").addEventListener("click", async () => {
@@ -44,12 +58,23 @@ document.getElementById("timeForPomodoroRestingSession").addEventListener("input
 	convertTimerValues("timeForPomodoroRestingSession", "timeToRestConverted");
 });
 
+document.getElementById("numberOfSessionsValue").addEventListener("input", async () => {
+	convertTimerValues("numberOfSessionsValue", "finalTimeConverted");
+});
+
 function convertTimerValues(originalID, convertedID) {
-	const timeForPomodoroWorkingSession = document.getElementById(originalID).value;
+	let timeForPomodoroWorkingSession = document.getElementById(originalID).value;
+	// console.log(timeForPomodoroWorkingSession);
 
 	if (timeForPomodoroWorkingSession == "") {
 		document.getElementById(convertedID).innerHTML = "N/A";
 		return;
+	} else if (convertedID == "finalTimeConverted") {
+		timeForPomodoroWorkingSession =
+			(parseInt(document.getElementById("timeForPomodoroWorkingSession").value) +
+				parseInt(document.getElementById("timeForPomodoroRestingSession").value)) *
+			parseInt(document.getElementById("numberOfSessionsValue").value);
+		// console.log(timeForPomodoroWorkingSession);
 	}
 
 	//get hours
