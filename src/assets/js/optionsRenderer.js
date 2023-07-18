@@ -22,6 +22,20 @@ document.getElementById("save-options").addEventListener("click", async () => {
 		localStorage.setItem("timeForPomodoroRestingSession", timeForPomodoroRestingSession);
 		localStorage.setItem("numberOfSessionsValue", numberOfSessionsValue);
 
+		if (timeForPomodoroWorkingSession == "" || timeForPomodoroRestingSession == "" || numberOfSessionsValue == "") {
+			Toastify.toast({
+				text: "Fill all the fields!",
+				duration: 3000,
+				close: true,
+				gravity: "bottom",
+				position: "right",
+				style: {
+					background: "linear-gradient(to right, rgba(14,0,255,1),rgba(0,232,255,1))",
+				},
+			});
+			return;
+		}
+
 		Toastify.toast({
 			text: "Options saved!",
 			duration: 3000,
