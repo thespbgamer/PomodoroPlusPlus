@@ -67,9 +67,23 @@ function updateCurrentSessionMessage(delayInSeconds = 1, status = currentActivit
 		if (status == "rest") {
 			document.getElementById("currentSession").innerHTML = "Resting";
 			document.getElementById("currentSession").classList.add("text-success");
+
+			progressBar.circle("#progressBarID", "#35c425", 50, timeLeft * 1000, "33.3%", 1);
+
+			setTimeout(() => {
+				//remove everything in the progress bar
+				document.getElementById("progressBarID").innerHTML = "";
+			}, timeLeft * 1000);
 		} else if (status == "work") {
 			document.getElementById("currentSession").innerHTML = "Working";
 			document.getElementById("currentSession").classList.add("text-danger");
+
+			progressBar.circle("#progressBarID", "#c4252d", 50, timeLeft * 1000, "33.3%", 1);
+
+			setTimeout(() => {
+				//remove everything in the progress bar
+				document.getElementById("progressBarID").innerHTML = "";
+			}, timeLeft * 1000);
 		} else {
 			//remove style color
 			document.getElementById("currentSession").innerHTML = "N/A";
