@@ -14,6 +14,7 @@ window.addEventListener("load", async () => {
 
 document.getElementById("startButton").addEventListener("click", async () => {
 	//start countdown timer
+	sessionsRemaining = numberOfSessions * 2;
 	startCountdown();
 });
 
@@ -21,9 +22,7 @@ function startCountdown() {
 	// sessions left
 	sessionsRemaining -= 1;
 
-	if (sessionsRemaining < 1) {
-		//reset sessions
-		numberOfSessionsValue = localStorage.getItem("numberOfSessionsValue");
+	if (sessionsRemaining < 0) {
 		document.getElementById("countdown").innerHTML = "Finished";
 		toggleCurrentActivityAndTimeLeft();
 		updateCurrentSessionMessage(0, "hide");

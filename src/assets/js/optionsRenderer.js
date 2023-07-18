@@ -6,7 +6,7 @@ document.getElementById("toggle-dark-mode").addEventListener("click", async () =
 });
 
 document.getElementById("save-options").addEventListener("click", async () => {
-	console.log("save-options clicked");
+	//console.log("save-options clicked");
 
 	//save in local storage the values of the options
 	let timeForPomodoroWorkingSession = document.getElementById("timeForPomodoroWorkingSession").value;
@@ -33,7 +33,7 @@ window.addEventListener("load", async () => {
 	if (numberOfSessionsValue == null || parseInt(numberOfSessionsValue) < 1) {
 		numberOfSessionsValue = 1;
 	}
-	console.log(numberOfSessionsValue);
+	//console.log(numberOfSessionsValue);
 
 	//set the values from local storage
 	document.getElementById("timeForPomodoroWorkingSession").value = timeForPomodoroWorkingSession;
@@ -52,10 +52,12 @@ window.addEventListener("load", async () => {
 //everytime you change the values on the timeForPomodoroWorkingSession
 document.getElementById("timeForPomodoroWorkingSession").addEventListener("input", async () => {
 	convertTimerValues("timeForPomodoroWorkingSession", "timeToWorkConverted");
+	convertTimerValues("numberOfSessionsValue", "finalTimeConverted");
 });
 
 document.getElementById("timeForPomodoroRestingSession").addEventListener("input", async () => {
 	convertTimerValues("timeForPomodoroRestingSession", "timeToRestConverted");
+	convertTimerValues("numberOfSessionsValue", "finalTimeConverted");
 });
 
 document.getElementById("numberOfSessionsValue").addEventListener("input", async () => {
