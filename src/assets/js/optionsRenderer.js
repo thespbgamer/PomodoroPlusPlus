@@ -43,6 +43,10 @@ document.getElementById("save-options").addEventListener("click", async () => {
 		localStorage.setItem("numberOfSessionsValue", numberOfSessionsValue);
 		localStorage.setItem("audioLevelValue", audioLevelValue / 100);
 
+		if (audioAfterWorkFileURL != null && audioAfterWorkFileURL != undefined) {
+			localStorage.setItem("audioAfterWorkFileURL", audioAfterWorkFileURL);
+		}
+
 		Toastify.toast({
 			text: "Options saved!",
 			duration: 3000,
@@ -185,3 +189,29 @@ function convertTimerValues(originalID, convertedID) {
 
 	document.getElementById(convertedID).innerHTML = timeForPomodoroWorkingSessionConvertedInnerHTML;
 }
+
+let audioAfterWorkFileURL = null;
+//after file is selected
+document.getElementById("audioAfterWorkFile").addEventListener("change", async () => {
+	console.log("file changed");
+	let audioAfterWorkFile = document.getElementById("audioAfterWorkFile").files[0];
+	console.log(audioAfterWorkFile);
+
+	if (audioAfterWorkFile == null || audioAfterWorkFile == undefined) {
+		return;
+	}
+
+	audioAfterWorkFileURL = URL.createObjectURL(audioAfterWorkFile);
+	console.log(audioAfterWorkFileURL);
+
+	Toastify.toast({
+		text: "Audio file saved!",
+		duration: 3000,
+		close: true,
+		gravity: "bottom",
+		position: "right",
+		style: {
+			background: "linear-gradient(to right, #00b09b, #96c93d)",
+		},
+	});
+});
