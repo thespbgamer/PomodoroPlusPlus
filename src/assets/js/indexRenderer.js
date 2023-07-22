@@ -120,5 +120,7 @@ function playAudio(currentAudioToPlay) {
 		currentAudio = new Audio("assets/audio/finish.wav");
 	}
 
+	//audio level set to 1%
+	currentAudio.volume = localStorage.getItem("audioLevelValue") || 1;
 	currentAudio.play();
 }

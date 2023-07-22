@@ -13,12 +13,18 @@ document.getElementById("save-options").addEventListener("click", async () => {
 		let timeForPomodoroWorkingSession = document.getElementById("timeForPomodoroWorkingSession").value;
 		let timeForPomodoroRestingSession = document.getElementById("timeForPomodoroRestingSession").value;
 		let numberOfSessionsValue = document.getElementById("numberOfSessionsValue").value;
+		let audioLevelValue = document.getElementById("audioLevelValue").value;
 
 		if (parseInt(numberOfSessionsValue == null || numberOfSessionsValue) < 1) {
 			numberOfSessionsValue = 1;
 		}
 
-		if (timeForPomodoroWorkingSession == "" || timeForPomodoroRestingSession == "" || numberOfSessionsValue == "") {
+		if (
+			timeForPomodoroWorkingSession == "" ||
+			timeForPomodoroRestingSession == "" ||
+			numberOfSessionsValue == "" ||
+			audioLevelValue == ""
+		) {
 			// Toastify.toast({
 			// 	text: "Fill all the fields!",
 			// 	duration: 3000,
@@ -35,20 +41,7 @@ document.getElementById("save-options").addEventListener("click", async () => {
 		localStorage.setItem("timeForPomodoroWorkingSession", timeForPomodoroWorkingSession);
 		localStorage.setItem("timeForPomodoroRestingSession", timeForPomodoroRestingSession);
 		localStorage.setItem("numberOfSessionsValue", numberOfSessionsValue);
-
-		if (timeForPomodoroWorkingSession == "" || timeForPomodoroRestingSession == "" || numberOfSessionsValue == "") {
-			// Toastify.toast({
-			// 	text: "Fill all the fields!",
-			// 	duration: 3000,
-			// 	close: true,
-			// 	gravity: "bottom",
-			// 	position: "right",
-			// 	style: {
-			// 		background: "linear-gradient(to right, rgba(14,0,255,1),rgba(0,232,255,1))",
-			// 	},
-			// });
-			return;
-		}
+		localStorage.setItem("audioLevelValue", audioLevelValue / 100);
 
 		Toastify.toast({
 			text: "Options saved!",
@@ -82,16 +75,23 @@ window.addEventListener("load", async () => {
 	let timeForPomodoroWorkingSession = localStorage.getItem("timeForPomodoroWorkingSession");
 	let timeForPomodoroRestingSession = localStorage.getItem("timeForPomodoroRestingSession");
 	let numberOfSessionsValue = localStorage.getItem("numberOfSessionsValue");
+	let audioLevelValue = localStorage.getItem("audioLevelValue");
 
 	if (numberOfSessionsValue == null || parseInt(numberOfSessionsValue) < 1) {
 		numberOfSessionsValue = 1;
 	}
+
+	if (audioLevelValue == null || parseInt(audioLevelValue) < 0 || parseInt(audioLevelValue) > 1) {
+		audioLevelValue = 1;
+	}
+
 	//console.log(numberOfSessionsValue);
 
 	//set the values from local storage
 	document.getElementById("timeForPomodoroWorkingSession").value = timeForPomodoroWorkingSession;
 	document.getElementById("timeForPomodoroRestingSession").value = timeForPomodoroRestingSession;
 	document.getElementById("numberOfSessionsValue").value = numberOfSessionsValue;
+	document.getElementById("audioLevelValue").value = audioLevelValue * 100;
 
 	convertTimerValues("timeForPomodoroWorkingSession", "timeToWorkConverted");
 	convertTimerValues("timeForPomodoroRestingSession", "timeToRestConverted");
