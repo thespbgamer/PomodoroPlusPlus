@@ -29,6 +29,9 @@ function startCountdown() {
 		return;
 	}
 
+	let countdownStarted = false;
+	var audio = new Audio("assets/audio/countdown.wav");
+
 	document.getElementById("startButton").setAttribute("disabled", "disabled");
 	updateCurrentSessionMessage();
 	var currentTimer = setInterval(function () {
@@ -37,12 +40,21 @@ function startCountdown() {
 			("0" + Math.floor(timeLeft / 60)).slice(-2) + ":" + ("0" + (timeLeft % 60)).slice(-2);
 		timeLeft -= 1;
 		if (timeLeft < 0) {
+			audio.pause();
+			audio = new Audio("assets/audio/done.wav");
+			audio.play();
 			clearInterval(currentTimer);
 			document.getElementById("countdown").innerHTML = "Finished";
 			document.getElementById("startButton").removeAttribute("disabled");
 			toggleCurrentActivityAndTimeLeft();
 			updateCurrentSessionMessage(0, "hide");
 			startCountdown();
+		}
+		if (timeLeft < 3 && !countdownStarted) {
+			countdownStarted = true;
+			//play wav file
+
+			audio.play();
 		}
 	}, 1000);
 }
