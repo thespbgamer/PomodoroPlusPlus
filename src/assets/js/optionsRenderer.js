@@ -5,6 +5,12 @@ document.getElementById("toggle-dark-mode").addEventListener("click", async () =
 	document.getElementById("bodyColor").setAttribute("data-bs-theme", isDarkMode ? "dark" : "light");
 });
 
+let audioAfterWorkFile = null;
+//after file is selected
+document.getElementById("audioAfterWorkFile").addEventListener("change", async () => {
+	audioAfterWorkFile = document.getElementById("audioAfterWorkFile").files[0];
+});
+
 document.getElementById("save-options").addEventListener("click", async () => {
 	//console.log("save-options clicked");
 
@@ -43,8 +49,15 @@ document.getElementById("save-options").addEventListener("click", async () => {
 		localStorage.setItem("numberOfSessionsValue", numberOfSessionsValue);
 		localStorage.setItem("audioLevelValue", audioLevelValue / 100);
 
-		if (audioAfterWorkFileURL != null && audioAfterWorkFileURL != undefined) {
-			localStorage.setItem("audioAfterWorkFileURL", audioAfterWorkFileURL);
+		if (audioAfterWorkFile != null && audioAfterWorkFile != undefined) {
+			//random 20 chars
+			let randomString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+			let finalDestination = window.files.copy(
+				audioAfterWorkFile.path,
+				randomString,
+				localStorage.getItem("audioAfterWorkFileURL")
+			);
+			localStorage.setItem("audioAfterWorkFileURL", finalDestination);
 		}
 
 		Toastify.toast({
@@ -189,29 +202,3 @@ function convertTimerValues(originalID, convertedID) {
 
 	document.getElementById(convertedID).innerHTML = timeForPomodoroWorkingSessionConvertedInnerHTML;
 }
-
-let audioAfterWorkFileURL = null;
-//after file is selected
-document.getElementById("audioAfterWorkFile").addEventListener("change", async () => {
-	console.log("file changed");
-	let audioAfterWorkFile = document.getElementById("audioAfterWorkFile").files[0];
-	console.log(audioAfterWorkFile);
-
-	if (audioAfterWorkFile == null || audioAfterWorkFile == undefined) {
-		return;
-	}
-
-	audioAfterWorkFileURL = URL.createObjectURL(audioAfterWorkFile);
-	console.log(audioAfterWorkFileURL);
-
-	Toastify.toast({
-		text: "Audio file saved!",
-		duration: 3000,
-		close: true,
-		gravity: "bottom",
-		position: "right",
-		style: {
-			background: "linear-gradient(to right, #00b09b, #96c93d)",
-		},
-	});
-});

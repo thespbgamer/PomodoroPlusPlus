@@ -70,11 +70,49 @@
 					</div>
 				</div>
 				<div class="row">
-					<div class="mb-3">
+					<div class="mb-3 col-xs-12 col-sm-6">
 						<label class="form-label">Audio After Work</label>
-						<input class="form-control form-control-sm" id="audioAfterWorkFile" type="file" accept="audio/*" />
+						<input class="form-control form-control-sm" id="audioAfterWorkFile" type="file" accept=".mp3,.wav" />
+						<div class="d-flex justify-content-center">
+							<button class="mt-1 btn btn-secondary" id="reset-audio-after-work">
+								<i class="bi bi-arrow-counterclockwise"> Reset audio after Work</i>
+							</button>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6">
+						<label class="form-label">Audio After Rest</label>
+						<input class="form-control form-control-sm" id="audioAfterRestFile" type="file" accept=".mp3,.wav" />
+						<div class="mt-1 d-flex justify-content-center">
+							<!-- button reset audio -->
+							<button class="btn btn-secondary" id="reset-audio-after-rest">
+								<i class="bi bi-arrow-counterclockwise"> Reset audio after Rest</i>
+							</button>
+						</div>
 					</div>
 				</div>
+				<div class="row">
+					<div class="mb-3 col-xs-12 col-sm-6">
+						<label class="form-label">Audio Countdown (3 seconds)</label>
+						<input class="form-control form-control-sm" id="audioCountDownkFile" type="file" accept=".mp3,.wav" />
+						<div class="mt-1 d-flex justify-content-center">
+							<!-- button reset audio -->
+							<button class="btn btn-secondary" id="reset-audio-after-work">
+								<i class="bi bi-arrow-counterclockwise"> Audio countdown</i>
+							</button>
+						</div>
+					</div>
+					<div class="col-xs-12 col-sm-6">
+						<label class="form-label">Audio Finish</label>
+						<input class="form-control form-control-sm" id="audioFinishFile" type="file" accept=".mp3,.wav" />
+						<div class="mt-1 d-flex justify-content-center">
+							<!-- button reset audio -->
+							<button class="btn btn-secondary" id="reset-audio-after-rest">
+								<i class="bi bi-arrow-counterclockwise"> Reset audio finish</i>
+							</button>
+						</div>
+					</div>
+				</div>
+				<br />
 				<div class="row">
 					<div class="d-flex justify-content-center">
 						<button type="submit" class="btn btn-primary btn-lg" id="save-options">

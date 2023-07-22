@@ -112,7 +112,11 @@ function playAudio(currentAudioToPlay) {
 		currentAudio = new Audio("assets/audio/countdown.wav");
 	} else if (currentAudioToPlay == "done") {
 		if (currentActivity == "work") {
-			currentAudio = new Audio("assets/audio/playAfterWork.wav");
+			if (localStorage.getItem("audioAfterWorkFileURL") != null) {
+				currentAudio = new Audio(localStorage.getItem("audioAfterWorkFileURL"));
+			} else {
+				currentAudio = new Audio("assets/audio/playAfterWork.wav");
+			}
 		} else if (currentActivity == "rest") {
 			currentAudio = new Audio("assets/audio/playAfterRest.wav");
 		}
