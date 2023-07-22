@@ -50,11 +50,9 @@ document.getElementById("save-options").addEventListener("click", async () => {
 		localStorage.setItem("audioLevelValue", audioLevelValue / 100);
 
 		if (audioAfterWorkFile != null && audioAfterWorkFile != undefined) {
-			//random 20 chars
-			let randomString = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
 			let finalDestination = window.files.copy(
 				audioAfterWorkFile.path,
-				randomString,
+				null,
 				localStorage.getItem("audioAfterWorkFileURL")
 			);
 			localStorage.setItem("audioAfterWorkFileURL", finalDestination);

@@ -40,6 +40,10 @@ contextBridge.exposeInMainWorld("files", {
 			return;
 		}
 
+		if (fileOutputName == null || fileOutputName == undefined) {
+			fileOutputName = Math.random().toString(36).substring(2, 15) + Math.random().toString(36).substring(2, 15);
+		}
+
 		let sourceExtension = path.extname(source);
 		//appdata path
 		// console.log(process.env.APPDATA);
