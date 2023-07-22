@@ -8,7 +8,6 @@ let currentAudio;
 window.addEventListener("load", async () => {
 	//console.log("onpageload");
 
-	toggleCurrentActivityAndTimeLeft();
 	numberOfSessions = localStorage.getItem("numberOfSessionsValue");
 	sessionsRemaining = numberOfSessions * 2;
 });
@@ -16,6 +15,7 @@ window.addEventListener("load", async () => {
 document.getElementById("startButton").addEventListener("click", async () => {
 	//start countdown timer
 	sessionsRemaining = numberOfSessions * 2;
+	toggleCurrentActivityAndTimeLeft("work");
 	startCountdown();
 });
 
@@ -25,7 +25,6 @@ function startCountdown() {
 
 	if (sessionsRemaining < 0) {
 		document.getElementById("countdown").innerHTML = "Finished";
-		toggleCurrentActivityAndTimeLeft();
 		updateCurrentSessionMessage(0, "hide");
 		return;
 	}
@@ -60,11 +59,11 @@ function startCountdown() {
 	}, 1000);
 }
 
-function toggleCurrentActivityAndTimeLeft() {
-	if (currentActivity == "work") {
+function toggleCurrentActivityAndTimeLeft(forceValue = null) {
+	if (currentActivity == "work" || forceValue == "rest") {
 		currentActivity = "rest";
 		timeLeft = localStorage.getItem("timeForPomodoroRestingSession");
-	} else {
+	} else if (currentActivity == "rest" || forceValue == "work") {
 		currentActivity = "work";
 		timeLeft = localStorage.getItem("timeForPomodoroWorkingSession");
 	}
@@ -112,7 +111,11 @@ function playAudio(currentAudioToPlay) {
 	if (currentAudioToPlay == "countdown") {
 		currentAudio = new Audio("assets/audio/countdown.wav");
 	} else if (currentAudioToPlay == "done") {
-		currentAudio = new Audio("assets/audio/done.wav");
+		if (currentActivity == "work") {
+			currentAudio = new Audio("assets/audio/playAfterWork.wav");
+		} else if (currentActivity == "rest") {
+			currentAudio = new Audio("assets/audio/playAfterRest.wav");
+		}
 	} else if (currentAudioToPlay == "finish") {
 		currentAudio = new Audio("assets/audio/finish.wav");
 	}
