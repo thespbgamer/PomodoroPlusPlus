@@ -32,7 +32,8 @@
 							placeholder="Time to work in seconds"
 							min="1"
 							max="86400"
-							id="timeForPomodoroWorkingSession" />
+							id="timeForPomodoroWorkingSession"
+						/>
 						<span class="input-group-text" id="timeToWorkConverted">N/A</span>
 					</div>
 				</div>
@@ -46,7 +47,8 @@
 							placeholder="Time to rest in seconds"
 							min="1"
 							max="86400"
-							id="timeForPomodoroRestingSession" />
+							id="timeForPomodoroRestingSession"
+						/>
 						<span class="input-group-text" id="timeToRestConverted">N/A</span>
 					</div>
 				</div>
@@ -60,7 +62,8 @@
 							placeholder="Number of sessions"
 							min="1"
 							max="100"
-							id="numberOfSessionsValue" />
+							id="numberOfSessionsValue"
+						/>
 						<span class="input-group-text" id="finalTimeConverted">N/A</span>
 					</div>
 				</div>
@@ -94,10 +97,10 @@
 				<div class="row">
 					<div class="mb-3 col-xs-12 col-sm-6">
 						<label class="form-label">Audio Countdown (3 seconds)</label>
-						<input class="form-control form-control-sm" id="audioCountDownkFile" type="file" accept=".mp3,.wav" />
+						<input class="form-control form-control-sm" id="audioCountDownFile" type="file" accept=".mp3,.wav" />
 						<div class="mt-1 d-flex justify-content-center">
 							<!-- button reset audio -->
-							<button class="btn btn-secondary" id="reset-audio-after-work">
+							<button class="btn btn-secondary" id="reset-audio-countdown">
 								<i class="bi bi-arrow-counterclockwise"> Audio countdown</i>
 							</button>
 						</div>
@@ -107,7 +110,7 @@
 						<input class="form-control form-control-sm" id="audioFinishFile" type="file" accept=".mp3,.wav" />
 						<div class="mt-1 d-flex justify-content-center">
 							<!-- button reset audio -->
-							<button class="btn btn-secondary" id="reset-audio-after-rest">
+							<button class="btn btn-secondary" id="reset-audio-finish">
 								<i class="bi bi-arrow-counterclockwise"> Reset audio finish</i>
 							</button>
 						</div>

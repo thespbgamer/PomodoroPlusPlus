@@ -109,19 +109,31 @@ function playAudio(currentAudioToPlay) {
 	}
 
 	if (currentAudioToPlay == "countdown") {
-		currentAudio = new Audio("assets/audio/countdown.wav");
+		if (localStorage.getItem("audioCountdownPath") != null) {
+			currentAudio = new Audio(localStorage.getItem("audioCountdownPath"));
+		} else {
+			currentAudio = new Audio("assets/audio/countdown.wav");
+		}
 	} else if (currentAudioToPlay == "done") {
 		if (currentActivity == "work") {
-			if (localStorage.getItem("audioAfterWorkFileURL") != null) {
-				currentAudio = new Audio(localStorage.getItem("audioAfterWorkFileURL"));
+			if (localStorage.getItem("audioAfterWorkFilePath") != null) {
+				currentAudio = new Audio(localStorage.getItem("audioAfterWorkFilePath"));
 			} else {
 				currentAudio = new Audio("assets/audio/playAfterWork.wav");
 			}
 		} else if (currentActivity == "rest") {
-			currentAudio = new Audio("assets/audio/playAfterRest.wav");
+			if (localStorage.getItem("audioAfterRestFilePath") != null) {
+				currentAudio = new Audio(localStorage.getItem("audioAfterRestFilePath"));
+			} else {
+				currentAudio = new Audio("assets/audio/playAfterRest.wav");
+			}
 		}
 	} else if (currentAudioToPlay == "finish") {
-		currentAudio = new Audio("assets/audio/finish.wav");
+		if (localStorage.getItem("audioFinishPath") != null) {
+			currentAudio = new Audio(localStorage.getItem("audioFinishPath"));
+		} else {
+			currentAudio = new Audio("assets/audio/finish.wav");
+		}
 	}
 
 	//audio level set to 1%

@@ -1,21 +1,68 @@
+let audioAfterWorkFile = null;
+let audioAfterRestFile = null;
+let audioCountDownFile = null;
+let audioFinishFile = null;
+
 document.getElementById("toggle-dark-mode").addEventListener("click", async () => {
 	const isDarkMode = await window.darkMode.toggle();
-	// console.log(isDarkMode);
-
 	document.getElementById("bodyColor").setAttribute("data-bs-theme", isDarkMode ? "dark" : "light");
 });
 
-let audioAfterWorkFile = null;
-//after file is selected
 document.getElementById("audioAfterWorkFile").addEventListener("change", async () => {
 	audioAfterWorkFile = document.getElementById("audioAfterWorkFile").files[0];
 });
 
-document.getElementById("save-options").addEventListener("click", async () => {
-	//console.log("save-options clicked");
+document.getElementById("audioAfterRestFile").addEventListener("change", async () => {
+	audioAfterRestFile = document.getElementById("audioAfterRestFile").files[0];
+});
 
+document.getElementById("audioCountDownFile").addEventListener("change", async () => {
+	audioCountDownFile = document.getElementById("audioCountDownFile").files[0];
+});
+
+document.getElementById("audioFinishFile").addEventListener("change", async () => {
+	audioFinishFile = document.getElementById("audioFinishFile").files[0];
+});
+
+document.getElementById("reset-audio-after-work").addEventListener("click", async () => {
+	window.files.copy(null, null, localStorage.getItem("audioAfterWorkFilePath"));
+	localStorage.removeItem("audioAfterWorkFilePath");
+	NotifyUpdate();
+});
+
+document.getElementById("reset-audio-after-rest").addEventListener("click", async () => {
+	window.files.copy(null, null, localStorage.getItem("audioAfterRestFilePath"));
+	localStorage.removeItem("audioAfterRestFilePath");
+	NotifyUpdate();
+});
+
+document.getElementById("reset-audio-countdown").addEventListener("click", async () => {
+	window.files.copy(null, null, localStorage.getItem("audioCountdownPath"));
+	localStorage.removeItem("audioCountdownPath");
+	NotifyUpdate();
+});
+
+document.getElementById("reset-audio-finish").addEventListener("click", async () => {
+	window.files.copy(null, null, localStorage.getItem("audioFinishPath"));
+	localStorage.removeItem("audioFinishPath");
+	NotifyUpdate();
+});
+
+function NotifyUpdate() {
+	Toastify.toast({
+		text: "Audio reset done.",
+		duration: 3000,
+		close: true,
+		gravity: "bottom",
+		position: "right",
+		style: {
+			background: "linear-gradient(to right, rgba(14,0,255,1),rgba(0,232,255,1))",
+		},
+	});
+}
+
+document.getElementById("save-options").addEventListener("click", async () => {
 	try {
-		//save in local storage the values of the options
 		let timeForPomodoroWorkingSession = document.getElementById("timeForPomodoroWorkingSession").value;
 		let timeForPomodoroRestingSession = document.getElementById("timeForPomodoroRestingSession").value;
 		let numberOfSessionsValue = document.getElementById("numberOfSessionsValue").value;
@@ -53,9 +100,32 @@ document.getElementById("save-options").addEventListener("click", async () => {
 			let finalDestination = window.files.copy(
 				audioAfterWorkFile.path,
 				null,
-				localStorage.getItem("audioAfterWorkFileURL")
+				localStorage.getItem("audioAfterWorkFilePath")
 			);
-			localStorage.setItem("audioAfterWorkFileURL", finalDestination);
+			localStorage.setItem("audioAfterWorkFilePath", finalDestination);
+		}
+
+		if (audioAfterRestFile != null && audioAfterRestFile != undefined) {
+			let finalDestination = window.files.copy(
+				audioAfterRestFile.path,
+				null,
+				localStorage.getItem("audioAfterRestFilePath")
+			);
+			localStorage.setItem("audioAfterRestFilePath", finalDestination);
+		}
+
+		if (audioCountDownFile != null && audioCountDownFile != undefined) {
+			let finalDestination = window.files.copy(
+				audioCountDownFile.path,
+				null,
+				localStorage.getItem("audioCountdownPath")
+			);
+			localStorage.setItem("audioCountdownPath", finalDestination);
+		}
+
+		if (audioFinishFile != null && audioFinishFile != undefined) {
+			let finalDestination = window.files.copy(audioFinishFile.path, null, localStorage.getItem("audioFinishPath"));
+			localStorage.setItem("audioFinishPath", finalDestination);
 		}
 
 		Toastify.toast({
@@ -69,7 +139,7 @@ document.getElementById("save-options").addEventListener("click", async () => {
 			},
 		});
 	} catch (err) {
-		console.log(err);
+		//console.log(err);
 		Toastify.toast({
 			text: err,
 			duration: 3000,
@@ -83,10 +153,7 @@ document.getElementById("save-options").addEventListener("click", async () => {
 	}
 });
 
-//onpageload
 window.addEventListener("load", async () => {
-	//console.log("onpageload");
-	//get the values from local storage
 	let timeForPomodoroWorkingSession = localStorage.getItem("timeForPomodoroWorkingSession");
 	let timeForPomodoroRestingSession = localStorage.getItem("timeForPomodoroRestingSession");
 	let numberOfSessionsValue = localStorage.getItem("numberOfSessionsValue");
@@ -100,9 +167,14 @@ window.addEventListener("load", async () => {
 		audioLevelValue = 1;
 	}
 
-	//console.log(numberOfSessionsValue);
+	if (timeForPomodoroWorkingSession == null) {
+		timeForPomodoroWorkingSession = 60;
+	}
 
-	//set the values from local storage
+	if (timeForPomodoroRestingSession == null) {
+		timeForPomodoroRestingSession = 30;
+	}
+
 	document.getElementById("timeForPomodoroWorkingSession").value = timeForPomodoroWorkingSession;
 	document.getElementById("timeForPomodoroRestingSession").value = timeForPomodoroRestingSession;
 	document.getElementById("numberOfSessionsValue").value = numberOfSessionsValue;
@@ -113,11 +185,6 @@ window.addEventListener("load", async () => {
 	convertTimerValues("numberOfSessionsValue", "finalTimeConverted");
 });
 
-// document.getElementById("reset-to-system").addEventListener("click", async () => {
-// 	document.getElementById("bodyColor").setAttribute("data-bs-theme", "dark");
-// });
-
-//everytime you change the values on the timeForPomodoroWorkingSession
 document.getElementById("timeForPomodoroWorkingSession").addEventListener("input", async () => {
 	convertTimerValues("timeForPomodoroWorkingSession", "timeToWorkConverted");
 	convertTimerValues("numberOfSessionsValue", "finalTimeConverted");
@@ -134,7 +201,6 @@ document.getElementById("numberOfSessionsValue").addEventListener("input", async
 
 function convertTimerValues(originalID, convertedID) {
 	let timeForPomodoroWorkingSession = document.getElementById(originalID).value;
-	// console.log(timeForPomodoroWorkingSession);
 
 	if (timeForPomodoroWorkingSession == "") {
 		document.getElementById(convertedID).innerHTML = "N/A";
@@ -144,7 +210,6 @@ function convertTimerValues(originalID, convertedID) {
 			(parseInt(document.getElementById("timeForPomodoroWorkingSession").value) +
 				parseInt(document.getElementById("timeForPomodoroRestingSession").value)) *
 			parseInt(document.getElementById("numberOfSessionsValue").value);
-		// console.log(timeForPomodoroWorkingSession);
 	}
 
 	//get hours
