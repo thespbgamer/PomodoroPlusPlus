@@ -136,7 +136,7 @@ function playAudio(currentAudioToPlay) {
 		}
 	}
 
-	//audio level set to 1%
+	//audio level set to 100%
 	currentAudio.volume = localStorage.getItem("audioLevelValue") || 1;
 	currentAudio.play();
 }
