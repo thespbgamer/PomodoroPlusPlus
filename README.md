@@ -30,4 +30,4 @@ Even though it has a simple UI, the usage of the app is 100% free and intuitive 
 
 ## Changelog
 
-- [Full Changelog](https://github.com/thespbgamer/PomodoroPlusPlus/blob/main/CHANGELOG.md#full-changelog)
+- [Full Changelog](https://github.com/thespbgamer/PomodoroPlusPlus/blob/main/CHANGELOG.MD#full-changelog)
