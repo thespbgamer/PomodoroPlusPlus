@@ -7,6 +7,9 @@ let currentAudio;
 //onpageload
 window.addEventListener("load", async () => {
 	//console.log("onpageload");
+	if (localStorage.getItem("numberOfSessionsValue") == null || localStorage.getItem("numberOfSessionsValue") < 1) {
+		window.location.replace("options.html");
+	}
 
 	numberOfSessions = localStorage.getItem("numberOfSessionsValue");
 	sessionsRemaining = numberOfSessions * 2;

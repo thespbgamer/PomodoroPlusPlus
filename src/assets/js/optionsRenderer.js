@@ -68,15 +68,19 @@ document.getElementById("save-options").addEventListener("click", async () => {
 		let numberOfSessionsValue = document.getElementById("numberOfSessionsValue").value;
 		let audioLevelValue = document.getElementById("audioLevelValue").value;
 
-		if (parseInt(numberOfSessionsValue == null || numberOfSessionsValue) < 1) {
-			numberOfSessionsValue = 1;
-		}
+		// if (parseInt(numberOfSessionsValue == null || numberOfSessionsValue) < 1) {
+		// 	numberOfSessionsValue = 1;
+		// }
 
 		if (
 			timeForPomodoroWorkingSession == "" ||
+			timeForPomodoroWorkingSession <= 0 ||
 			timeForPomodoroRestingSession == "" ||
+			timeForPomodoroRestingSession <= 0 ||
 			numberOfSessionsValue == "" ||
-			audioLevelValue == ""
+			numberOfSessionsValue <= 0 ||
+			audioLevelValue == "" ||
+			audioLevelValue < 0
 		) {
 			// Toastify.toast({
 			// 	text: "Fill all the fields!",
