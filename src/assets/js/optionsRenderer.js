@@ -27,24 +27,32 @@ document.getElementById("audioFinishFile").addEventListener("change", async () =
 document.getElementById("reset-audio-after-work").addEventListener("click", async () => {
 	window.files.copy(null, null, localStorage.getItem("audioAfterWorkFilePath"));
 	localStorage.removeItem("audioAfterWorkFilePath");
+	audioAfterWorkFile = null;
+	document.getElementById("audioAfterWorkFile").value = null;
 	NotifyUpdate();
 });
 
 document.getElementById("reset-audio-after-rest").addEventListener("click", async () => {
 	window.files.copy(null, null, localStorage.getItem("audioAfterRestFilePath"));
 	localStorage.removeItem("audioAfterRestFilePath");
+	audioAfterRestFile = null;
+	document.getElementById("audioAfterRestFile").value = null;
 	NotifyUpdate();
 });
 
 document.getElementById("reset-audio-countdown").addEventListener("click", async () => {
 	window.files.copy(null, null, localStorage.getItem("audioCountdownPath"));
 	localStorage.removeItem("audioCountdownPath");
+	audioCountDownFile = null;
+	document.getElementById("audioCountDownFile").value = null;
 	NotifyUpdate();
 });
 
 document.getElementById("reset-audio-finish").addEventListener("click", async () => {
 	window.files.copy(null, null, localStorage.getItem("audioFinishPath"));
 	localStorage.removeItem("audioFinishPath");
+	audioFinishFile = null;
+	document.getElementById("audioFinishFile").value = null;
 	NotifyUpdate();
 });
 
@@ -75,12 +83,16 @@ document.getElementById("save-options").addEventListener("click", async () => {
 		if (
 			timeForPomodoroWorkingSession == "" ||
 			timeForPomodoroWorkingSession <= 0 ||
+			timeForPomodoroWorkingSession > 86400 ||
 			timeForPomodoroRestingSession == "" ||
 			timeForPomodoroRestingSession <= 0 ||
+			timeForPomodoroRestingSession > 86400 ||
 			numberOfSessionsValue == "" ||
 			numberOfSessionsValue <= 0 ||
+			numberOfSessionsValue > 100 ||
 			audioLevelValue == "" ||
-			audioLevelValue < 0
+			audioLevelValue < 0 ||
+			audioLevelValue > 100
 		) {
 			// Toastify.toast({
 			// 	text: "Fill all the fields!",
@@ -203,6 +215,21 @@ document.getElementById("numberOfSessionsValue").addEventListener("input", async
 	convertTimerValues("numberOfSessionsValue", "finalTimeConverted");
 });
 
+document.getElementById("play-audio-after-work").addEventListener("click", async () => {
+	playAudio("done", "work");
+});
+
+document.getElementById("play-audio-after-rest").addEventListener("click", async () => {
+	playAudio("done", "rest");
+});
+document.getElementById("play-audio-countdown").addEventListener("click", async () => {
+	playAudio("countdown");
+});
+
+document.getElementById("play-audio-finish").addEventListener("click", async () => {
+	playAudio("finish");
+});
+
 function convertTimerValues(originalID, convertedID) {
 	let timeForPomodoroWorkingSession = document.getElementById(originalID).value;
 
@@ -268,4 +295,54 @@ function convertTimerValues(originalID, convertedID) {
 	}
 
 	document.getElementById(convertedID).innerHTML = timeForPomodoroWorkingSessionConvertedInnerHTML;
+}
+
+let currentAudio;
+
+function playAudio(currentAudioToPlay, currentActivity = "") {
+	if (currentAudio != null && currentAudio != undefined) {
+		currentAudio.pause();
+	}
+
+	if (currentAudioToPlay == "countdown") {
+		if (localStorage.getItem("audioCountdownPath") != null) {
+			currentAudio = new Audio(localStorage.getItem("audioCountdownPath"));
+		} else if (audioCountDownFile != null) {
+			currentAudio = new Audio(audioCountDownFile.path);
+		} else {
+			currentAudio = new Audio("assets/audio/countdown.wav");
+		}
+	} else if (currentAudioToPlay == "done") {
+		if (currentActivity == "work") {
+			if (localStorage.getItem("audioAfterWorkFilePath") != null) {
+				currentAudio = new Audio(localStorage.getItem("audioAfterWorkFilePath"));
+			} else if (audioAfterWorkFile != null) {
+				currentAudio = new Audio(audioAfterWorkFile.path);
+			} else {
+				currentAudio = new Audio("assets/audio/playAfterWork.wav");
+			}
+		} else if (currentActivity == "rest") {
+			if (localStorage.getItem("audioAfterRestFilePath") != null) {
+				currentAudio = new Audio(localStorage.getItem("audioAfterRestFilePath"));
+			} else if (audioAfterRestFile != null) {
+				currentAudio = new Audio(audioAfterRestFile.path);
+			} else {
+				currentAudio = new Audio("assets/audio/playAfterRest.wav");
+			}
+		}
+	} else if (currentAudioToPlay == "finish") {
+		if (localStorage.getItem("audioFinishPath") != null) {
+			currentAudio = new Audio(localStorage.getItem("audioFinishPath"));
+		} else if (audioFinishFile != null) {
+			currentAudio = new Audio(audioFinishFile.path);
+		} else {
+			currentAudio = new Audio("assets/audio/finish.wav");
+		}
+	}
+
+	console.log(currentAudio);
+
+	//audio level set to 100%
+	currentAudio.volume = localStorage.getItem("audioLevelValue") || 1;
+	currentAudio.play();
 }
