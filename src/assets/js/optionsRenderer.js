@@ -176,7 +176,17 @@ window.addEventListener("load", async () => {
 	let audioLevelValue = localStorage.getItem("audioLevelValue");
 
 	if (numberOfSessionsValue == null || parseInt(numberOfSessionsValue) < 1) {
-		numberOfSessionsValue = 1;
+		numberOfSessionsValue = 3;
+		Toastify.toast({
+			text: "Confirm the options and click save.",
+			duration: 5000,
+			close: true,
+			gravity: "bottom",
+			position: "right",
+			style: {
+				background: "linear-gradient(to right, rgba(14,0,255,1),rgba(0,232,255,1))",
+			},
+		});
 	}
 
 	if (audioLevelValue == null || parseInt(audioLevelValue) < 0 || parseInt(audioLevelValue) > 1) {
@@ -184,11 +194,11 @@ window.addEventListener("load", async () => {
 	}
 
 	if (timeForPomodoroWorkingSession == null) {
-		timeForPomodoroWorkingSession = 60;
+		timeForPomodoroWorkingSession = 1500;
 	}
 
 	if (timeForPomodoroRestingSession == null) {
-		timeForPomodoroRestingSession = 30;
+		timeForPomodoroRestingSession = 900;
 	}
 
 	document.getElementById("timeForPomodoroWorkingSession").value = timeForPomodoroWorkingSession;
