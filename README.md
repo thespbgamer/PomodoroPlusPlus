@@ -17,7 +17,9 @@ Even though it has a simple UI, the usage of the app is 100% free and intuitive 
 
 ## Installation
 
-1. **Not avaliable yet.**
+1. Go to the [releases](https://github.com/thespbgamer/PomodoroPlusPlus/releases)
+2. Download the `.exe` file
+3. Run the `.exe` file
 
 ## Options
 
