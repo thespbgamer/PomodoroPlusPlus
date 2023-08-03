@@ -6,42 +6,60 @@
 		<meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
 		<meta name="color-scheme" content="light dark" />
 		<link rel="stylesheet" type="text/css" href="./assets/css/styles.css" />
+		<link rel="stylesheet" type="text/css" href="./assets/css/tailwind.css" />
 	</head>
-	<body id="bodyColor" data-bs-theme="dark">
-		<nav class="navbar fixed-bottom nav-underline bg-body-secondary border-top">
-			<div class="container-fluid">
-				<a class="navbar-brand active" href="#"><i class="bi bi-house-fill"></i></a>
-				<a class="navbar-brand" href="options.html"><i class="bi bi-gear-fill"></i></a>
-			</div>
-		</nav>
-		<div class="container mt-2 unselectable">
-			<div class="row">
-				<div class="d-flex justify-content-center">
-					<h1 class="fw-bold">Pomodoro++</h1>
+	<body id="bodyColor" data-bs-theme="dark" class="unselectable">
+		<h1 class="text-center text-6xl font-bold underline">Pomodoro++</h1>
+		<div class="mt-3 text-center object-center">
+			<button
+				id="startButton"
+				type="button"
+				class="text-white bg-[#FF9119] disabled:cursor-not-allowed hover:bg-[#FF9119]/80 focus:ring-4 focus:outline-none focus:ring-[#FF9119]/50 font-medium rounded-lg text-sm px-5 py-2.5 text-center inline-flex items-center disabled:dark:bg-[#914f07] disabled:dark:hover:bg-[#6b3b07] dark:hover:bg-[#FF9119]/80 dark:focus:ring-[#FF9119]/40"
+			>
+				<i class="bi bi-clock-fillw-4 h-4 mr-2 -ml-1"></i>
+				Start Session
+			</button>
+		</div>
+		<div class="unselectable text-center">
+			<h2 class="text-3xl font-semibold" id="currentSession">N/A</h2>
+			<h2 class="text-2xl font-semibold" id="countdown">00:00:00</h2>
+			<div id="progressBarID" class="m-2 flex justify-center"></div>
+			<div
+				class="fixed bottom-0 left-0 z-50 w-full h-20 bg-yellow-50 border-t border-yellow-200 dark:bg-yellow-600 dark:border-yellow-900"
+			>
+				<div class="grid h-full max-w-lg grid-cols-2 mx-auto font-medium">
+					<button
+						disabled
+						type="button"
+						class="inline-flex disabled:cursor-not-allowed flex-col items-center justify-center px-5 hover:bg-yellow-100 dark:hover:bg-yellow-500 group"
+						onclick="location.href = 'index.html'"
+					>
+						<i
+							class="text-2xl bi bi-house-fill w-5 h-5 mb-2 text-yellow-500 dark:text-yellow-400 group-hover:text-yellow-400 dark:group-hover:text-yellow-300"
+						></i>
+						<span
+							class="text-xl unselectable text-yellow-500 dark:text-yellow-400 group-hover:text-yellow-400 dark:group-hover:text-yellow-300"
+							>Home</span
+						>
+					</button>
+					<button
+						type="button"
+						class="inline-flex flex-col items-center justify-center px-5 hover:bg-yellow-100 dark:hover:bg-yellow-500 group"
+						onclick="location.href = 'options.html'"
+					>
+						<i
+							class="text-2xl bi bi-sliders2-vertical w-5 h-5 mb-2 text-yellow-500 dark:text-yellow-400 group-hover:text-yellow-400 dark:group-hover:text-yellow-300"
+						></i>
+						<span
+							class="text-xl unselectable text-yellow-500 dark:text-yellow-400 group-hover:text-yellow-400 dark:group-hover:text-yellow-300"
+							>Settings</span
+						>
+					</button>
 				</div>
-			</div>
-			<br />
-			<div class="row">
-				<div class="d-flex justify-content-center">
-					<button type="button" class="btn btn-primary btn-lg" id="startButton">Start Session</button>
-				</div>
-			</div>
-			<div class="row">
-				<div class="d-flex justify-content-center">
-					<h2 class="fw-bold" id="currentSession">N/A</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div class="d-flex justify-content-center">
-					<h2 class="fw-bold" id="countdown">00:00:00</h2>
-				</div>
-			</div>
-			<div class="row">
-				<div id="progressBarID" class="m-2 d-flex justify-content-center"></div>
 			</div>
 
 			<script src="../node_modules/jquery/dist/jquery.js"></script>
-			<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+			<!-- <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script> -->
 			<script src="./assets/js/configLoad.js"></script>
 			<script src="./assets/js/indexRenderer.js"></script>
 		</div>

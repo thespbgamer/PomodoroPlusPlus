@@ -6,168 +6,260 @@
 		<meta http-equiv="Content-Security-Policy" content="script-src 'self' 'unsafe-inline';" />
 		<meta name="color-scheme" content="light dark" />
 		<link rel="stylesheet" type="text/css" href="./assets/css/styles.css" />
+		<link rel="stylesheet" type="text/css" href="./assets/css/tailwind.css" />
 	</head>
 	<body id="bodyColor" data-bs-theme="dark">
-		<nav class="navbar fixed-bottom nav-underline bg-body-secondary border-top">
-			<div class="container-fluid">
-				<a class="navbar-brand" href="index.html"><i class="bi bi-house-fill"></i></a>
-				<a class="navbar-brand active" href="#"><i class="bi bi-gear-fill"></i></a>
-			</div>
-		</nav>
+		<h1 class="text-6xl font-bold underline text-center unselectable">Options Menu</h1>
 		<div class="container mt-2">
-			<div class="row">
-				<div class="d-flex justify-content-center">
-					<h1 class="fw-bold unselectable">Options Menu</h1>
-				</div>
-			</div>
 			<br class="unselectable" />
 			<form onsubmit="return false;">
-				<div>
-					<label class="form-label unselectable">Time to Work (in seconds)</label>
-					<div class="input-group mb-3">
-						<input
-							required
-							type="number"
-							class="form-control"
-							placeholder="Time to work in seconds"
-							min="1"
-							max="86400"
-							id="timeForPomodoroWorkingSession"
-						/>
-						<span class="input-group-text unselectable" id="timeToWorkConverted">N/A</span>
+				<label
+					for="input-group-workingSessions"
+					class="ml-3 block mb-2 text-sm font-medium text-gray-900 dark:text-white unselectable"
+					>Time to Work (in seconds)</label
+				>
+				<div class="relative ml-3 mb-6">
+					<input
+						id="timeForPomodoroWorkingSession"
+						placeholder="Time to work in seconds"
+						min="1"
+						max="86400"
+						required
+						type="number"
+						id="input-group-workingSessions"
+						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pr-64 p-2.5 dark:dark:bg-gray-800 dark:border-gray-900 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+					/>
+					<div class="absolute inset-y-0 right-0 flex items-center pr-3.5 pointer-events-none">
+						<span class="unselectable" id="timeToWorkConverted">N/A</span>
 					</div>
 				</div>
-				<div>
-					<label class="form-label unselectable">Time to Rest (in seconds)</label>
-					<div class="input-group mb-3">
-						<input
-							required
-							type="number"
-							class="form-control"
-							placeholder="Time to rest in seconds"
-							min="1"
-							max="86400"
-							id="timeForPomodoroRestingSession"
-						/>
-						<span class="input-group-text unselectable" id="timeToRestConverted">N/A</span>
+
+				<label
+					for="input-group-restingSessions"
+					class="ml-3 block mb-2 text-sm font-medium text-gray-900 dark:text-white unselectable"
+					>Time to Rest (in seconds)</label
+				>
+				<div class="relative ml-3 mb-6">
+					<input
+						id="timeForPomodoroRestingSession"
+						placeholder="Time to rest in seconds"
+						min="1"
+						max="86400"
+						required
+						type="number"
+						id="input-group-restingSessions"
+						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pr-64 p-2.5 dark:dark:bg-gray-800 dark:border-gray-900 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+					/>
+					<div class="absolute inset-y-0 right-0 flex items-center pr-3.5 pointer-events-none">
+						<span class="unselectable" id="timeToRestConverted">N/A</span>
 					</div>
 				</div>
-				<div>
-					<label class="form-label unselectable">Number of Sessions</label>
-					<div class="input-group mb-3">
-						<input
-							required
-							type="number"
-							class="form-control"
-							placeholder="Number of sessions"
-							min="1"
-							max="100"
-							id="numberOfSessionsValue"
-						/>
-						<span class="input-group-text unselectable" id="finalTimeConverted">N/A</span>
+
+				<label
+					for="input-group-numberSessions"
+					class="ml-3 block mb-2 text-sm font-medium text-gray-900 dark:text-white unselectable"
+					>Number of Sessions</label
+				>
+				<div class="relative ml-3 mb-6">
+					<input
+						id="numberOfSessionsValue"
+						placeholder="Number of Sessions"
+						min="1"
+						max="100"
+						required
+						type="number"
+						id="input-group-numberSessions"
+						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full pr-64 p-2.5 dark:dark:bg-gray-800 dark:border-gray-900 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+					/>
+					<div class="absolute inset-y-0 right-0 flex items-center pr-3.5 pointer-events-none">
+						<span class="unselectable" id="finalTimeConverted">N/A</span>
 					</div>
 				</div>
-				<div class="row">
+
+				<label
+					for="input-group-audioLevels"
+					class="ml-3 block mb-2 text-sm font-medium text-gray-900 dark:text-white unselectable"
+					>Audio Levels (%)</label
+				>
+				<div class="relative ml-3 mb-6">
+					<input
+						id="audioLevelValue"
+						placeholder="Audio Levels (%)"
+						min="1"
+						max="100"
+						required
+						type="number"
+						id="input-group-audioLevels"
+						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:dark:bg-gray-800 dark:border-gray-900 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+					/>
+				</div>
+
+				<!-- <div class="row">
 					<div class="mb-3">
 						<label class="form-label unselectable">Audio Levels (%)</label>
 						<input type="number" min="0" max="100" id="audioLevelValue" required class="form-control" />
 					</div>
-				</div>
-				<div class="row">
-					<div class="mb-3 col-xs-12 col-sm-6">
-						<label class="form-label unselectable">Audio After Work</label>
+				</div> -->
+
+				<div class="mx-4 w-full grid grid-cols-2 mb-2 unselectable">
+					<div class="mx-1">
+						<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input"
+							>Audio After Work</label
+						>
 						<input
-							class="form-control form-control-sm unselectable"
 							id="audioAfterWorkFile"
 							type="file"
 							accept=".mp3,.wav"
+							class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
 						/>
-						<div class="mt-1 d-flex justify-content-center">
-							<button class="btn btn-secondary unselectable" id="reset-audio-after-work">
-								<i class="bi bi-arrow-counterclockwise"> Reset audio after Work</i>
+						<div class="mt-1 flex justify-center">
+							<button
+								id="reset-audio-after-work"
+								class="mx-1 px-3 py-2 mb-1 text-xs font-medium text-center rounded-lg focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+							>
+								<i class="bi bi-arrow-counterclockwise"></i>
 							</button>
-							<button class="btn btn-success ms-1 unselectable" id="play-audio-after-work">
+							<button
+								id="play-audio-after-work"
+								class="mx-1 px-3 py-2 mb-1 text-xs font-medium text-center rounded-lg focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+							>
 								<i class="bi bi-play-fill"></i>
 							</button>
 						</div>
 					</div>
-					<div class="col-xs-12 col-sm-6">
-						<label class="form-label unselectable">Audio After Rest</label>
+					<div class="mx-1">
+						<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input"
+							>Audio After Rest</label
+						>
 						<input
-							class="form-control form-control-sm unselectable"
 							id="audioAfterRestFile"
 							type="file"
 							accept=".mp3,.wav"
+							class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
 						/>
-						<div class="mt-1 d-flex justify-content-center">
-							<!-- button reset audio -->
-							<button class="btn btn-secondary unselectable" id="reset-audio-after-rest">
-								<i class="bi bi-arrow-counterclockwise"> Reset audio after Rest</i>
+						<div class="mt-1 flex justify-center">
+							<button
+								id="reset-audio-after-rest"
+								class="mx-1 px-3 py-2 mb-1 text-xs font-medium text-center rounded-lg focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+							>
+								<i class="bi bi-arrow-counterclockwise"></i>
 							</button>
-							<button class="btn btn-success ms-1 unselectable" id="play-audio-after-rest">
+							<button
+								id="play-audio-after-rest"
+								class="mx-1 px-3 py-2 mb-1 text-xs font-medium text-center rounded-lg focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+							>
 								<i class="bi bi-play-fill"></i>
 							</button>
 						</div>
 					</div>
 				</div>
-				<div class="row">
-					<div class="mb-3 col-xs-12 col-sm-6">
-						<label class="form-label unselectable">Audio Countdown (3 seconds)</label>
+				<div class="mt-5 mx-4 w-full grid grid-cols-2 mb-2 unselectable">
+					<div class="mx-1">
+						<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input"
+							>Audio Countdown (3 seconds)</label
+						>
 						<input
-							class="form-control form-control-sm unselectable"
 							id="audioCountDownFile"
 							type="file"
 							accept=".mp3,.wav"
+							class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
 						/>
-						<div class="mt-1 d-flex justify-content-center">
-							<!-- button reset audio -->
-							<button class="btn btn-secondary unselectable" id="reset-audio-countdown">
-								<i class="bi bi-arrow-counterclockwise"> Audio countdown</i>
+						<div class="mt-1 flex justify-center">
+							<button
+								id="reset-audio-countdown"
+								class="mx-1 px-3 py-2 mb-1 text-xs font-medium text-center rounded-lg focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+							>
+								<i class="bi bi-arrow-counterclockwise"></i>
 							</button>
-							<button class="btn btn-success ms-1 unselectable" id="play-audio-countdown">
+							<button
+								id="play-audio-countdown"
+								class="mx-1 px-3 py-2 mb-1 text-xs font-medium text-center rounded-lg focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+							>
 								<i class="bi bi-play-fill"></i>
 							</button>
 						</div>
 					</div>
-					<div class="col-xs-12 col-sm-6">
-						<label class="form-label unselectable">Audio Finish</label>
+					<div class="mx-1">
+						<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input"
+							>Audio Finish</label
+						>
 						<input
-							class="form-control form-control-sm unselectable"
 							id="audioFinishFile"
 							type="file"
 							accept=".mp3,.wav"
+							class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
 						/>
-						<div class="mt-1 d-flex justify-content-center">
-							<!-- button reset audio -->
-							<button class="btn btn-secondary unselectable" id="reset-audio-finish">
-								<i class="bi bi-arrow-counterclockwise"> Reset audio finish</i>
+						<div class="mt-1 flex justify-center">
+							<button
+								id="reset-audio-finish"
+								class="mx-1 px-3 py-2 mb-1 text-xs font-medium text-center rounded-lg focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+							>
+								<i class="bi bi-arrow-counterclockwise"></i>
 							</button>
-							<button class="btn btn-success ms-1 unselectable" id="play-audio-finish">
+							<button
+								id="play-audio-finish"
+								class="mx-1 px-3 py-2 mb-1 text-xs font-medium text-center rounded-lg focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+							>
 								<i class="bi bi-play-fill"></i>
 							</button>
 						</div>
 					</div>
 				</div>
-				<br class="unselectable" />
-				<div class="row">
-					<div class="d-flex justify-content-center">
-						<button type="submit" class="btn btn-primary btn-lg" id="save-options">
-							<i class="bi bi-save"></i> Save Options
-						</button>
-					</div>
+				<div class="mt-8 grid place-items-center unselectable">
+					<button
+						type="submit"
+						id="save-options"
+						class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-10 py-5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+					>
+						<i class="bi bi-save mr-1"></i> Save Options
+					</button>
+				</div>
+				<div class="grid place-items-end mb-20">
+					<button
+						id="toggle-dark-mode"
+						class="py-2 px-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+					>
+						<i class="bi bi-circle-half"></i>
+					</button>
 				</div>
 			</form>
 
-			<div class="row mt-2 mb-5">
-				<div class="d-flex justify-content-end">
-					<button class="btn btn-secondary btn-sm" id="toggle-dark-mode">
-						<i class="bi bi-circle-half"></i>
+			<div
+				class="fixed bottom-0 left-0 z-50 w-full h-20 bg-yellow-50 border-t border-yellow-200 dark:bg-yellow-600 dark:border-yellow-900"
+			>
+				<div class="grid h-full max-w-lg grid-cols-2 mx-auto font-medium">
+					<button
+						type="button"
+						class="inline-flex flex-col items-center justify-center px-5 hover:bg-yellow-100 dark:hover:bg-yellow-500 group"
+						onclick="location.href = 'index.html'"
+					>
+						<i
+							class="text-2xl bi bi-house-fill w-5 h-5 mb-2 text-yellow-500 dark:text-yellow-400 group-hover:text-yellow-400 dark:group-hover:text-yellow-300"
+						></i>
+						<span
+							class="text-xl unselectable text-yellow-500 dark:text-yellow-400 group-hover:text-yellow-400 dark:group-hover:text-yellow-300"
+							>Home</span
+						>
+					</button>
+					<button
+						type="button"
+						disabled
+						class="inline-flex disabled:cursor-not-allowed flex-col items-center justify-center px-5 hover:bg-yellow-100 dark:hover:bg-yellow-500 group"
+						onclick="location.href = 'options.html'"
+					>
+						<i
+							class="text-2xl bi bi-sliders2-vertical w-5 h-5 mb-2 text-yellow-500 dark:text-yellow-400 group-hover:text-yellow-400 dark:group-hover:text-yellow-300"
+						></i>
+						<span
+							class="text-xl unselectable text-yellow-500 dark:text-yellow-400 group-hover:text-yellow-400 dark:group-hover:text-yellow-300"
+							>Settings</span
+						>
 					</button>
 				</div>
 			</div>
 
 			<script src="../node_modules/jquery/dist/jquery.js"></script>
-			<script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script>
+			<!-- <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script> -->
 			<script src="./assets/js/optionsRenderer.js"></script>
 			<script src="./assets/js/configLoad.js"></script>
 		</div>

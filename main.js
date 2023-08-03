@@ -1,3 +1,4 @@
+//npx tailwindcss -i ./src/assets/css/styles.css -o ./src/assets/css/tailwind.css --watch
 require("dotenv").config();
 const { app, BrowserWindow, ipcMain, nativeTheme } = require("electron");
 const path = require("path");

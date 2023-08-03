@@ -75,15 +75,15 @@ function toggleCurrentActivityAndTimeLeft(forceValue = null) {
 function updateCurrentSessionMessage(delayInSeconds = 1, status = currentActivity) {
 	setTimeout(function () {
 		//remove text danger class
-		document.getElementById("currentSession").classList.remove("text-danger");
+		document.getElementById("currentSession").classList.remove("text-red-600");
 		//remove text success class
-		document.getElementById("currentSession").classList.remove("text-success");
+		document.getElementById("currentSession").classList.remove("text-green-500");
 
 		if (status == "rest") {
 			document.getElementById("currentSession").innerHTML = "Resting";
-			document.getElementById("currentSession").classList.add("text-success");
+			document.getElementById("currentSession").classList.add("text-green-500");
 
-			progressBar.circle("#progressBarID", "#35c425", 50, timeLeft * 1000, "33.3%", 1);
+			progressBar.circle("#progressBarID", "#35c425", 50, timeLeft * 1000, "40%", 1);
 
 			setTimeout(() => {
 				//remove everything in the progress bar
@@ -91,9 +91,9 @@ function updateCurrentSessionMessage(delayInSeconds = 1, status = currentActivit
 			}, timeLeft * 1000);
 		} else if (status == "work") {
 			document.getElementById("currentSession").innerHTML = "Working";
-			document.getElementById("currentSession").classList.add("text-danger");
+			document.getElementById("currentSession").classList.add("text-red-600");
 
-			progressBar.circle("#progressBarID", "#c4252d", 50, timeLeft * 1000, "33.3%", 1);
+			progressBar.circle("#progressBarID", "#c4252d", 50, timeLeft * 1000, "40%", 1);
 
 			setTimeout(() => {
 				//remove everything in the progress bar
