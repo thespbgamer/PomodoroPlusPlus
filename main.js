@@ -13,11 +13,13 @@ function createWindow() {
 	const win = new BrowserWindow({
 		width: !isDev ? 1280 : 1500,
 		height: 720,
+		icon: "icon.ico",
 		autoHideMenuBar: true,
 		center: true,
 		webPreferences: {
 			preload: path.join(__dirname, filesToCall["mainPreload.js"]),
 			nodeIntegration: true,
+			devTools: isDev,
 		},
 	});
 

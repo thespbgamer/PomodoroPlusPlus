@@ -1,28 +1,30 @@
 {
-	"name": "pomodoroplus",
+	"name": "pomodoroplusplus",
 	"version": "1.0.0",
 	"description": "File that makes it simples to do a customized pomodoro.",
 	"main": "main.js",
 	"author": "thespbgamer",
+	"build": {
+		"appId": "com.thespbgamer.PomodoroPlusPlus",
+		"productName": "Pomodoro++",
+		"nsis": {
+			"artifactName": "Pomodoro++.setup.${version}.${ext}",
+			"uninstallDisplayName": "Pomodoro++"
+		},
+		"files": "!build-assets${/*}"
+	},
 	"scripts": {
-		"start": "electron-forge start",
 		"dev": "npx electronmon .",
-		"build": "npx electron-packager .",
-		"fstart": "electron-forge start",
-		"fpackage": "electron-forge package",
-		"fmake": "electron-forge make",
-		"package": "electron-forge package",
-		"make": "electron-forge make"
+		"devOnce": "npx electron-packager .",
+		"pack": "electron-builder --dir",
+		"dist": "electron-builder",
+		"package": "npx electron-packager ./"
 	},
 	"license": "ISC",
 	"devDependencies": {
-		"@electron-forge/cli": "^6.2.1",
-		"@electron-forge/maker-deb": "^6.2.1",
-		"@electron-forge/maker-rpm": "^6.2.1",
-		"@electron-forge/maker-squirrel": "^6.2.1",
-		"@electron-forge/maker-zip": "^6.2.1",
-		"@electron-forge/plugin-auto-unpack-natives": "^6.2.1",
 		"electron": "^25.1.0",
+		"electron-builder": "^24.6.3",
+		"electron-packager": "^17.1.1",
 		"electronmon": "^2.0.2"
 	},
 	"dependencies": {
@@ -30,7 +32,6 @@
 		"bootstrap": "^5.3.0",
 		"bootstrap-icons": "^1.10.5",
 		"dotenv": "^16.3.1",
-		"electron-squirrel-startup": "^1.0.0",
 		"jquery": "^3.7.0",
 		"progressbar.js": "^1.1.0",
 		"toastify-js": "^1.12.0"
