@@ -1,5 +1,4 @@
 const { contextBridge, ipcRenderer } = require("electron");
-const Toastify = require("toastify-js");
 var ProgressBar = require("progressbar.js");
 const fs = require("fs");
 const path = require("path");
@@ -8,10 +7,6 @@ contextBridge.exposeInMainWorld("darkMode", {
 	toggle: () => ipcRenderer.invoke("dark-mode:toggle"),
 	get: () => ipcRenderer.invoke("dark-mode:get"),
 	// system: () => ipcRenderer.invoke("dark-mode:system"),
-});
-
-contextBridge.exposeInMainWorld("Toastify", {
-	toast: (options) => Toastify(options).showToast(),
 });
 
 contextBridge.exposeInMainWorld("progressBar", {

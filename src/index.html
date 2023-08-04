@@ -24,44 +24,53 @@
 			<h2 class="text-3xl font-semibold" id="currentSession">N/A</h2>
 			<h2 class="text-2xl font-semibold" id="countdown">00:00:00</h2>
 			<div id="progressBarID" class="m-2 flex justify-center"></div>
-			<div
-				class="fixed bottom-0 left-0 z-50 w-full h-20 bg-yellow-50 border-t border-yellow-200 dark:bg-yellow-600 dark:border-yellow-900"
-			>
-				<div class="grid h-full max-w-lg grid-cols-2 mx-auto font-medium">
-					<button
-						disabled
-						type="button"
-						class="inline-flex disabled:cursor-not-allowed flex-col items-center justify-center px-5 hover:bg-yellow-100 dark:hover:bg-yellow-500 group"
-						onclick="location.href = 'index.html'"
-					>
-						<i
-							class="text-2xl bi bi-house-fill w-5 h-5 mb-2 text-yellow-500 dark:text-yellow-400 group-hover:text-yellow-400 dark:group-hover:text-yellow-300"
-						></i>
-						<span
-							class="text-xl unselectable text-yellow-500 dark:text-yellow-400 group-hover:text-yellow-400 dark:group-hover:text-yellow-300"
-							>Home</span
-						>
-					</button>
-					<button
-						type="button"
-						class="inline-flex flex-col items-center justify-center px-5 hover:bg-yellow-100 dark:hover:bg-yellow-500 group"
-						onclick="location.href = 'options.html'"
-					>
-						<i
-							class="text-2xl bi bi-sliders2-vertical w-5 h-5 mb-2 text-yellow-500 dark:text-yellow-400 group-hover:text-yellow-400 dark:group-hover:text-yellow-300"
-						></i>
-						<span
-							class="text-xl unselectable text-yellow-500 dark:text-yellow-400 group-hover:text-yellow-400 dark:group-hover:text-yellow-300"
-							>Settings</span
-						>
-					</button>
-				</div>
-			</div>
-
-			<script src="../node_modules/jquery/dist/jquery.js"></script>
-			<!-- <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script> -->
-			<script src="./assets/js/configLoad.js"></script>
-			<script src="./assets/js/indexRenderer.js"></script>
 		</div>
+
+		<div
+			class="fixed bottom-0 left-0 z-50 w-full h-20 border-t bg-neutral-100 border-neutral-200 dark:bg-gray-700 dark:border-gray-900"
+		>
+			<div class="grid h-full max-w-lg grid-cols-2 mx-auto font-medium unselectable">
+				<button
+					type="button"
+					class="ease-in-out duration-300 inline-flex flex-col items-center justify-center disabled:bg-yellow-800 disabled:hover:bg-yellow-900 dark:disabled:hover:bg-yellow-900 disabled:cursor-not-allowed hover:bg-yellow-200 dark:hover:bg-yellow-600 group"
+					onclick="location.href = 'index.html'"
+					disabled
+				>
+					<!-- Disabled Buttons -->
+					<i class="bi bi-house-fill text-2xl text-yellow-600"></i>
+					<span class="text-xl text-yellow-600">Home</span>
+					<!-- Enabled Buttons -->
+					<!-- <i
+						class="bi bi-house-fill ease-in-out duration-500 text-2xl group-hover:text-3xl text-yellow-500 group-hover:text-yellow-500 dark:text-yellow-500 dark:group-hover:text-yellow-400"
+					></i>
+					<span
+						class="ease-in-out duration-500 text-xl group-hover:text-2xl text-yellow-500 group-hover:text-yellow-500 dark:text-yellow-400 dark:group-hover:text-yellow-300"
+						>Home</span
+					> -->
+				</button>
+				<button
+					type="button"
+					class="ease-in-out duration-300 inline-flex flex-col items-center justify-center disabled:bg-yellow-800 disabled:hover:bg-yellow-900 dark:disabled:hover:bg-yellow-900 disabled:cursor-not-allowed hover:bg-yellow-200 dark:hover:bg-yellow-600 group"
+					onclick="location.href = 'options.html'"
+				>
+					<!-- Disabled Buttons -->
+					<!-- <i class="bi bi-sliders2-vertical text-2xl text-yellow-600"></i>
+					<span class="text-xl text-yellow-600">Settings</span> -->
+					<!-- Enabled Buttons -->
+					<i
+						class="bi bi-sliders2-vertical ease-in-out duration-500 text-2xl group-hover:text-3xl text-yellow-500 group-hover:text-yellow-500 dark:text-yellow-500 dark:group-hover:text-yellow-400"
+					></i>
+					<span
+						class="ease-in-out duration-500 text-xl group-hover:text-2xl text-yellow-500 group-hover:text-yellow-500 dark:text-yellow-400 dark:group-hover:text-yellow-300"
+						>Settings</span
+					>
+				</button>
+			</div>
+		</div>
+
+		<script src="../node_modules/jquery/dist/jquery.js"></script>
+		<!-- <script src="../node_modules/bootstrap/dist/js/bootstrap.bundle.js"></script> -->
+		<script src="./assets/js/configLoad.js"></script>
+		<script src="./assets/js/indexRenderer.js"></script>
 	</body>
 </html>

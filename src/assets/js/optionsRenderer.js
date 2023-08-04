@@ -2,6 +2,7 @@ let audioAfterWorkFile = null;
 let audioAfterRestFile = null;
 let audioCountDownFile = null;
 let audioFinishFile = null;
+let notificationCount;
 
 document.getElementById("toggle-dark-mode").addEventListener("click", async () => {
 	const isDarkMode = await window.darkMode.toggle();
@@ -29,7 +30,8 @@ document.getElementById("reset-audio-after-work").addEventListener("click", asyn
 	localStorage.removeItem("audioAfterWorkFilePath");
 	audioAfterWorkFile = null;
 	document.getElementById("audioAfterWorkFile").value = null;
-	NotifyUpdate();
+
+	showAlertAndDismiss("alert-blue-div", "alert-blue-text", "Audio after work reset.", 3000, "blue");
 });
 
 document.getElementById("reset-audio-after-rest").addEventListener("click", async () => {
@@ -37,7 +39,7 @@ document.getElementById("reset-audio-after-rest").addEventListener("click", asyn
 	localStorage.removeItem("audioAfterRestFilePath");
 	audioAfterRestFile = null;
 	document.getElementById("audioAfterRestFile").value = null;
-	NotifyUpdate();
+	showAlertAndDismiss("alert-blue-div", "alert-blue-text", "Audio after rest reset.", 3000, "blue");
 });
 
 document.getElementById("reset-audio-countdown").addEventListener("click", async () => {
@@ -45,7 +47,7 @@ document.getElementById("reset-audio-countdown").addEventListener("click", async
 	localStorage.removeItem("audioCountdownPath");
 	audioCountDownFile = null;
 	document.getElementById("audioCountDownFile").value = null;
-	NotifyUpdate();
+	showAlertAndDismiss("alert-blue-div", "alert-blue-text", "Audio countdown reset.", 3000, "blue");
 });
 
 document.getElementById("reset-audio-finish").addEventListener("click", async () => {
@@ -53,21 +55,8 @@ document.getElementById("reset-audio-finish").addEventListener("click", async ()
 	localStorage.removeItem("audioFinishPath");
 	audioFinishFile = null;
 	document.getElementById("audioFinishFile").value = null;
-	NotifyUpdate();
+	showAlertAndDismiss("alert-blue-div", "alert-blue-text", "Audio finish reset.", 3000, "blue");
 });
-
-function NotifyUpdate() {
-	Toastify.toast({
-		text: "Audio reset done.",
-		duration: 3000,
-		close: true,
-		gravity: "bottom",
-		position: "right",
-		style: {
-			background: "linear-gradient(to right, rgba(14,0,255,1),rgba(0,232,255,1))",
-		},
-	});
-}
 
 document.getElementById("save-options").addEventListener("click", async () => {
 	try {
@@ -94,16 +83,6 @@ document.getElementById("save-options").addEventListener("click", async () => {
 			audioLevelValue < 0 ||
 			audioLevelValue > 100
 		) {
-			// Toastify.toast({
-			// 	text: "Fill all the fields!",
-			// 	duration: 3000,
-			// 	close: true,
-			// 	gravity: "bottom",
-			// 	position: "right",
-			// 	style: {
-			// 		background: "linear-gradient(to right, rgba(14,0,255,1),rgba(0,232,255,1))",
-			// 	},
-			// });
 			return;
 		}
 
@@ -144,32 +123,15 @@ document.getElementById("save-options").addEventListener("click", async () => {
 			localStorage.setItem("audioFinishPath", finalDestination);
 		}
 
-		Toastify.toast({
-			text: "Options saved!",
-			duration: 3000,
-			close: true,
-			gravity: "bottom",
-			position: "right",
-			style: {
-				background: "linear-gradient(to right, #00b09b, #96c93d)",
-			},
-		});
+		showAlertAndDismiss("alert-green-div", "alert-green-text", "Options Saved!", 3000, "green");
 	} catch (err) {
 		//console.log(err);
-		Toastify.toast({
-			text: err,
-			duration: 3000,
-			close: true,
-			gravity: "bottom",
-			position: "right",
-			style: {
-				background: "linear-gradient(to right, rgba(37,2,2,1),rgba(233,68,68,1))",
-			},
-		});
+		showAlertAndDismiss("alert-red-div", "alert-red-text", err, 3000, "red");
 	}
 });
 
 window.addEventListener("load", async () => {
+	notificationCount = 0;
 	let timeForPomodoroWorkingSession = localStorage.getItem("timeForPomodoroWorkingSession");
 	let timeForPomodoroRestingSession = localStorage.getItem("timeForPomodoroRestingSession");
 	let numberOfSessionsValue = localStorage.getItem("numberOfSessionsValue");
@@ -177,16 +139,7 @@ window.addEventListener("load", async () => {
 
 	if (numberOfSessionsValue == null || parseInt(numberOfSessionsValue) < 1) {
 		numberOfSessionsValue = 3;
-		Toastify.toast({
-			text: "Confirm the options and click save.",
-			duration: 5000,
-			close: true,
-			gravity: "bottom",
-			position: "right",
-			style: {
-				background: "linear-gradient(to right, rgba(14,0,255,1),rgba(0,232,255,1))",
-			},
-		});
+		showAlertAndDismiss("alert-blue-div", "alert-blue-text", "Confirm the options and click save.", 3000, "purple");
 	}
 
 	if (audioLevelValue == null || parseInt(audioLevelValue) < 0 || parseInt(audioLevelValue) > 1) {
@@ -355,4 +308,61 @@ function playAudio(currentAudioToPlay, currentActivity = "") {
 	//audio level set to 100%
 	currentAudio.volume = localStorage.getItem("audioLevelValue") || 1;
 	currentAudio.play();
+}
+
+function showAlertAndDismiss(alertDivID, alertTextID, alertText, alertDismissTimeInMS = 3000, color = "blue") {
+	let notificationArea = document.getElementById("notificationArea");
+
+	if (notificationArea.innerHTML.length <= 0) {
+		notificationCount = 0;
+	}
+	notificationCount += 1;
+
+	let currentDivID = alertDivID + notificationCount;
+	let currentTextID = alertTextID + notificationCount;
+
+	let currentDismiss = alertDismissTimeInMS * /* notificationCount */ 1;
+
+	let innerHTMLForDiv =
+		`<div
+			id="` +
+		currentDivID +
+		`"
+		class="unselectable opacity-0 duration-200 ease-out transition transform fixed bottom-0 right-2 flex items-center p-4 z-100 mb-24 text-` +
+		color +
+		`-800 rounded-lg bg-` +
+		color +
+		`-50 dark:bg-` +
+		color +
+		`-950 dark:text-` +
+		color +
+		`-400"
+		role="alert">
+		<i class="bi bi-info-circle-fill"></i>
+		<span class="sr-only">Info</span>
+		<div id="` +
+		currentTextID +
+		`" class="ml-1 text-sm font-medium">
+			</div>
+		</div>`;
+
+	notificationArea.innerHTML = innerHTMLForDiv;
+
+	setTimeout(() => {
+		if (document.getElementById(currentDivID) != null) {
+			document.getElementById(currentDivID).classList.remove("opacity-0");
+			document.getElementById(currentTextID).innerHTML = alertText;
+
+			setTimeout(() => {
+				if (document.getElementById(currentDivID) != null) {
+					document.getElementById(currentDivID).classList.add("opacity-0");
+					setTimeout(() => {
+						if (document.getElementById(currentDivID) != null) {
+							document.getElementById(currentDivID).remove();
+						}
+					}, 250);
+				}
+			}, currentDismiss);
+		}
+	}, 50);
 }

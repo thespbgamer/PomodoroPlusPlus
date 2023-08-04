@@ -101,8 +101,8 @@
 					</div>
 				</div> -->
 
-				<div class="mx-4 w-full grid grid-cols-2 mb-2 unselectable">
-					<div class="mx-1">
+				<div class="ml-2 w-full grid grid-cols-2 mb-2 unselectable">
+					<div class="pl-1 mr-1">
 						<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input"
 							>Audio After Work</label
 						>
@@ -127,7 +127,7 @@
 							</button>
 						</div>
 					</div>
-					<div class="mx-1">
+					<div class="ml-1 pr-2">
 						<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input"
 							>Audio After Rest</label
 						>
@@ -153,8 +153,8 @@
 						</div>
 					</div>
 				</div>
-				<div class="mt-5 mx-4 w-full grid grid-cols-2 mb-2 unselectable">
-					<div class="mx-1">
+				<div class="mt-5 ml-2 w-full grid grid-cols-2 mb-2 unselectable">
+					<div class="pl-1 mr-1">
 						<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input"
 							>Audio Countdown (3 seconds)</label
 						>
@@ -179,7 +179,7 @@
 							</button>
 						</div>
 					</div>
-					<div class="mx-1">
+					<div class="ml-1 pr-2">
 						<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input"
 							>Audio Finish</label
 						>
@@ -214,7 +214,7 @@
 						<i class="bi bi-save mr-1"></i> Save Options
 					</button>
 				</div>
-				<div class="grid place-items-end mb-20">
+				<div class="grid place-items-end mb-24">
 					<button
 						id="toggle-dark-mode"
 						class="py-2 px-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
@@ -224,36 +224,42 @@
 				</div>
 			</form>
 
+			<div id="notificationArea"></div>
+
 			<div
-				class="fixed bottom-0 left-0 z-50 w-full h-20 bg-yellow-50 border-t border-yellow-200 dark:bg-yellow-600 dark:border-yellow-900"
+				class="fixed bottom-0 left-0 z-50 w-full h-20 border-t bg-neutral-100 border-neutral-200 dark:bg-gray-700 dark:border-gray-900"
 			>
-				<div class="grid h-full max-w-lg grid-cols-2 mx-auto font-medium">
+				<div class="grid h-full max-w-lg grid-cols-2 mx-auto font-medium unselectable">
 					<button
 						type="button"
-						class="inline-flex flex-col items-center justify-center px-5 hover:bg-yellow-100 dark:hover:bg-yellow-500 group"
+						class="ease-in-out duration-300 inline-flex flex-col items-center justify-center disabled:bg-yellow-800 disabled:hover:bg-yellow-900 dark:disabled:hover:bg-yellow-900 disabled:cursor-not-allowed hover:bg-yellow-200 dark:hover:bg-yellow-600 group"
 						onclick="location.href = 'index.html'"
 					>
 						<i
-							class="text-2xl bi bi-house-fill w-5 h-5 mb-2 text-yellow-500 dark:text-yellow-400 group-hover:text-yellow-400 dark:group-hover:text-yellow-300"
+							class="bi bi-house-fill ease-in-out duration-500 text-2xl group-hover:text-3xl text-yellow-500 group-hover:text-yellow-500 dark:text-yellow-500 dark:group-hover:text-yellow-400"
 						></i>
 						<span
-							class="text-xl unselectable text-yellow-500 dark:text-yellow-400 group-hover:text-yellow-400 dark:group-hover:text-yellow-300"
+							class="ease-in-out duration-500 text-xl group-hover:text-2xl text-yellow-500 group-hover:text-yellow-500 dark:text-yellow-400 dark:group-hover:text-yellow-300"
 							>Home</span
 						>
 					</button>
 					<button
 						type="button"
-						disabled
-						class="inline-flex disabled:cursor-not-allowed flex-col items-center justify-center px-5 hover:bg-yellow-100 dark:hover:bg-yellow-500 group"
+						class="ease-in-out duration-300 inline-flex flex-col items-center justify-center disabled:bg-yellow-800 disabled:hover:bg-yellow-900 dark:disabled:hover:bg-yellow-900 disabled:cursor-not-allowed hover:bg-yellow-200 dark:hover:bg-yellow-600 group"
 						onclick="location.href = 'options.html'"
+						disabled
 					>
-						<i
-							class="text-2xl bi bi-sliders2-vertical w-5 h-5 mb-2 text-yellow-500 dark:text-yellow-400 group-hover:text-yellow-400 dark:group-hover:text-yellow-300"
+						<!-- Disabled Buttons -->
+						<i class="bi bi-sliders2-vertical text-2xl text-yellow-600"></i>
+						<span class="text-xl text-yellow-600">Settings</span>
+						<!-- Enabled Buttons -->
+						<!-- <i
+							class="bi bi-sliders2-vertical ease-in-out duration-500 text-2xl group-hover:text-3xl text-yellow-500 group-hover:text-yellow-500 dark:text-yellow-500 dark:group-hover:text-yellow-400"
 						></i>
 						<span
-							class="text-xl unselectable text-yellow-500 dark:text-yellow-400 group-hover:text-yellow-400 dark:group-hover:text-yellow-300"
+							class="ease-in-out duration-500 text-xl group-hover:text-2xl text-yellow-500 group-hover:text-yellow-500 dark:text-yellow-400 dark:group-hover:text-yellow-300"
 							>Settings</span
-						>
+						> -->
 					</button>
 				</div>
 			</div>
