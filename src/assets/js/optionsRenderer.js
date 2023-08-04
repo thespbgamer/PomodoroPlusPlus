@@ -64,7 +64,6 @@ document.getElementById("save-options").addEventListener("click", async () => {
 		let timeForPomodoroRestingSession = document.getElementById("timeForPomodoroRestingSession").value;
 		let numberOfSessionsValue = document.getElementById("numberOfSessionsValue").value;
 		let audioLevelValue = document.getElementById("audioLevelValue").value;
-
 		// if (parseInt(numberOfSessionsValue == null || numberOfSessionsValue) < 1) {
 		// 	numberOfSessionsValue = 1;
 		// }
