@@ -10,9 +10,6 @@ window.addEventListener("load", async () => {
 	if (localStorage.getItem("numberOfSessionsValue") == null || localStorage.getItem("numberOfSessionsValue") < 1) {
 		window.location.replace("options.html");
 	}
-
-	//test
-
 	numberOfSessions = localStorage.getItem("numberOfSessionsValue");
 	sessionsRemaining = numberOfSessions * 2;
 });
@@ -37,9 +34,7 @@ function startCountdown() {
 			.style.setProperty("filter", "drop-shadow(0px 0px 3px rgba(255,215,0, 0.7))");
 
 		updateCurrentSessionMessage(0, "hide");
-
 		toggleCurrentActivityAndTimeLeft("rest");
-
 		return;
 	}
 
@@ -108,7 +103,7 @@ function updateCurrentSessionMessage(delayInSeconds = 1, status = currentActivit
 			document.querySelector(".progressBarValue").style.setProperty("animation", "none");
 			setTimeout(function () {
 				document.querySelector(".progressBarValue").style.setProperty("animation", "");
-			}, 10);
+			}, 5);
 		} else if (status == "work") {
 			document.getElementById("currentSession").innerHTML = "Working";
 			document.getElementById("currentSession").classList.add("text-red-600");
@@ -122,7 +117,7 @@ function updateCurrentSessionMessage(delayInSeconds = 1, status = currentActivit
 			document.querySelector(".progressBarValue").style.setProperty("animation", "none");
 			setTimeout(function () {
 				document.querySelector(".progressBarValue").style.setProperty("animation", "");
-			}, 10);
+			}, 5);
 		} else {
 			//remove style color
 			document.getElementById("currentSession").innerHTML = "N/A";
