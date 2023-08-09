@@ -11,6 +11,8 @@ window.addEventListener("load", async () => {
 		window.location.replace("options.html");
 	}
 
+	//test
+
 	numberOfSessions = localStorage.getItem("numberOfSessionsValue");
 	sessionsRemaining = numberOfSessions * 2;
 });
@@ -28,7 +30,16 @@ function startCountdown() {
 
 	if (sessionsRemaining < 0) {
 		document.getElementById("countdown").innerHTML = "Finished";
+
+		document.querySelector(".progressBarValue").style.setProperty("stroke", "gold");
+		document
+			.querySelector(".progressBarValue")
+			.style.setProperty("filter", "drop-shadow(0px 0px 3px rgba(255,215,0, 0.7))");
+
 		updateCurrentSessionMessage(0, "hide");
+
+		toggleCurrentActivityAndTimeLeft("rest");
+
 		return;
 	}
 
@@ -36,6 +47,9 @@ function startCountdown() {
 
 	document.getElementById("startButton").setAttribute("disabled", "disabled");
 	updateCurrentSessionMessage();
+
+	// console.log(timeLeft);
+
 	var currentTimer = setInterval(function () {
 		//format mm:ss with allwas 2 digits
 		document.getElementById("countdown").innerHTML =
@@ -79,29 +93,40 @@ function updateCurrentSessionMessage(delayInSeconds = 1, status = currentActivit
 		//remove text success class
 		document.getElementById("currentSession").classList.remove("text-green-500");
 
+		document.querySelector(".progressBarValue").style.setProperty("--animationTime", "");
+
 		if (status == "rest") {
 			document.getElementById("currentSession").innerHTML = "Resting";
 			document.getElementById("currentSession").classList.add("text-green-500");
 
-			progressBar.circle("#progressBarID", "#35c425", 50, timeLeft * 1000, "40%", 1);
+			document.querySelector(".progressBarValue").style.setProperty("stroke", "green");
+			document
+				.querySelector(".progressBarValue")
+				.style.setProperty("filter", " drop-shadow(0px 0px 3px rgba(0, 255, 0, 0.7))");
 
-			setTimeout(() => {
-				//remove everything in the progress bar
-				document.getElementById("progressBarID").innerHTML = "";
-			}, timeLeft * 1000);
+			document.querySelector(".progressBarValue").style.setProperty("--animationTime", timeLeft + "s");
+			document.querySelector(".progressBarValue").style.setProperty("animation", "none");
+			setTimeout(function () {
+				document.querySelector(".progressBarValue").style.setProperty("animation", "");
+			}, 10);
 		} else if (status == "work") {
 			document.getElementById("currentSession").innerHTML = "Working";
 			document.getElementById("currentSession").classList.add("text-red-600");
 
-			progressBar.circle("#progressBarID", "#c4252d", 50, timeLeft * 1000, "40%", 1);
+			document.querySelector(".progressBarValue").style.setProperty("stroke", "red");
+			document
+				.querySelector(".progressBarValue")
+				.style.setProperty("filter", "drop-shadow(0px 0px 3px rgba(255, 0, 0, 0.7))");
 
-			setTimeout(() => {
-				//remove everything in the progress bar
-				document.getElementById("progressBarID").innerHTML = "";
-			}, timeLeft * 1000);
+			document.querySelector(".progressBarValue").style.setProperty("--animationTime", timeLeft + "s");
+			document.querySelector(".progressBarValue").style.setProperty("animation", "none");
+			setTimeout(function () {
+				document.querySelector(".progressBarValue").style.setProperty("animation", "");
+			}, 10);
 		} else {
 			//remove style color
 			document.getElementById("currentSession").innerHTML = "N/A";
+			document.querySelector(".progressBarValue").style.setProperty("--animationTime", "0ms");
 		}
 	}, delayInSeconds * 1000);
 }

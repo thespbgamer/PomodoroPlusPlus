@@ -1,5 +1,4 @@
 const { contextBridge, ipcRenderer } = require("electron");
-var ProgressBar = require("progressbar.js");
 const fs = require("fs");
 const path = require("path");
 
@@ -9,22 +8,7 @@ contextBridge.exposeInMainWorld("darkMode", {
 	// system: () => ipcRenderer.invoke("dark-mode:system"),
 });
 
-contextBridge.exposeInMainWorld("progressBar", {
-	line: (id, duration, animationType) => new ProgressBar.Line(id, { duration: duration }).animate(animationType),
-	circle: (id, color, strokeWidth, duration, contentWidth, animationType) =>
-		new ProgressBar.Circle(id, {
-			color: color,
-			strokeWidth: strokeWidth,
-			duration: duration,
-			svgStyle: {
-				// Important: make sure that your container has same
-				// aspect ratio as the SVG canvas. See SVG canvas sizes above.
-				width: contentWidth,
-			},
-		}).animate(animationType),
-});
-
-//copy file
+//file management
 contextBridge.exposeInMainWorld("files", {
 	copy: (source, fileOutputName, fileToDelete) => {
 		if (fs.existsSync(fileToDelete)) {
