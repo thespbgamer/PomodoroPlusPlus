@@ -30,7 +30,7 @@
 .progressCircles {
 	fill: none;
 	stroke-width: 5px;
-	stroke-linecap: round;
+	stroke-linecap: square;
 }
 
 .progressBarBG {
@@ -46,6 +46,6 @@
 
 @keyframes progressAnimation {
 	100% {
-		stroke-dashoffset: 60px;
+		stroke-dashoffset: 67px;
 	}
 }
