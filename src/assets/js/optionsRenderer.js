@@ -4,6 +4,13 @@ let audioCountDownFile = null;
 let audioFinishFile = null;
 let notificationCount;
 
+document.addEventListener("keypress", function (e) {
+	if (e.key === "Enter") {
+		e.preventDefault();
+		return false;
+	}
+});
+
 document.getElementById("toggle-dark-mode").addEventListener("click", async () => {
 	const isDarkMode = await window.darkMode.toggle();
 	document.getElementById("bodyColor").setAttribute("data-bs-theme", isDarkMode ? "dark" : "light");
