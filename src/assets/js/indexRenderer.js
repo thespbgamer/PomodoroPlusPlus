@@ -1,70 +1,75 @@
-let timeLeft = -1;
-let currentActivity = "N/A";
-let numberOfSessions = -1;
-let sessionsRemaining = -1;
-let currentAudio;
+//Default invalid values for certain global variables
+let glob_timeLeft = -1;
+let glob_currentActivity = "N/A";
+let glob_numberOfSessions = -1;
+let glob_pomodoroTimerPartsRemaining = -1;
+let glob_currentAudio;
 
-//onpageload
+//On page load
 window.addEventListener("load", async () => {
-	//console.log("onpageload");
+	//If it's the first time opening the app, redirect to the options
 	if (localStorage.getItem("numberOfSessionsValue") == null || localStorage.getItem("numberOfSessionsValue") < 1) {
 		window.location.replace("options.html");
 	}
-	numberOfSessions = localStorage.getItem("numberOfSessionsValue");
-	sessionsRemaining = numberOfSessions * 2;
+
+	//Get the number of sessions and save it
+	glob_numberOfSessions = localStorage.getItem("numberOfSessionsValue");
 });
 
+//When you click the start button
 document.getElementById("startButton").addEventListener("click", async () => {
-	//start countdown timer
-	sessionsRemaining = numberOfSessions * 2;
+	//Calculate the number of pomodoro timers remaining
+	glob_pomodoroTimerPartsRemaining = glob_numberOfSessions * 2;
+
+	//Force the current activity to "work"
 	toggleCurrentActivityAndTimeLeft("work");
+
+	//Start the countdown
 	startCountdown();
 });
 
 function startCountdown() {
-	// sessions left
-	sessionsRemaining -= 1;
+	//Has the countdown started ?
+	let hasCountdownStarted = false;
 
-	if (sessionsRemaining < 0) {
-		document.getElementById("countdown").innerHTML = "Finished";
+	// Timers left -1
+	glob_pomodoroTimerPartsRemaining -= 1;
 
-		document.querySelector(".progressBarValue").style.setProperty("stroke", "gold");
-		document
-			.querySelector(".progressBarValue")
-			.style.setProperty("filter", "drop-shadow(0px 0px 3px rgba(255,215,0, 0.7))");
-
-		updateCurrentSessionMessage(0, "hide");
+	//If no more timers, define the pomodoro with "Finished", and re-enable the start button
+	if (glob_pomodoroTimerPartsRemaining < 0) {
+		updateCurrentSessionMessage(0, "finish");
 		toggleCurrentActivityAndTimeLeft("rest");
 		return;
 	}
 
-	let countdownStarted = false;
-
+	//Disable the start button and update colors of text and the circle timer
 	document.getElementById("startButton").setAttribute("disabled", "disabled");
 	updateCurrentSessionMessage();
 
-	// console.log(timeLeft);
+	// console.log(glob_timeLeft);
 
-	var currentTimer = setInterval(function () {
+	var currentPartTimer = setInterval(function () {
 		//format mm:ss with allwas 2 digits
 		document.getElementById("countdown").innerHTML =
-			("0" + Math.floor(timeLeft / 60)).slice(-2) + ":" + ("0" + (timeLeft % 60)).slice(-2);
-		timeLeft -= 1;
-		if (timeLeft < 0) {
-			if (sessionsRemaining == 0) {
+			("0" + Math.floor(glob_timeLeft / 60)).slice(-2) + ":" + ("0" + (glob_timeLeft % 60)).slice(-2);
+		glob_timeLeft -= 1;
+		if (glob_timeLeft < 0) {
+			if (glob_pomodoroTimerPartsRemaining == 0) {
+				document.getElementById("countdown").innerHTML = "Congratulations";
 				playAudio("finish");
 			} else {
+				document.getElementById("countdown").innerHTML = "Next part is Starting";
 				playAudio("done");
 			}
-			clearInterval(currentTimer);
-			document.getElementById("countdown").innerHTML = "Finished";
+			clearInterval(currentPartTimer);
+
 			document.getElementById("startButton").removeAttribute("disabled");
 			toggleCurrentActivityAndTimeLeft();
-			updateCurrentSessionMessage(0, "hide");
+			updateCurrentSessionMessage(0, "resetStyles");
 			startCountdown();
 		}
-		if (timeLeft < 3 && !countdownStarted) {
-			countdownStarted = true;
+		if (glob_timeLeft < 3 && !hasCountdownStarted) {
+			hasCountdownStarted = true;
 			//play wav file
 			playAudio("countdown");
 		}
@@ -72,94 +77,97 @@ function startCountdown() {
 }
 
 function toggleCurrentActivityAndTimeLeft(forceValue = null) {
-	if (currentActivity == "work" || forceValue == "rest") {
-		currentActivity = "rest";
-		timeLeft = localStorage.getItem("timeForPomodoroRestingSession");
-	} else if (currentActivity == "rest" || forceValue == "work") {
-		currentActivity = "work";
-		timeLeft = localStorage.getItem("timeForPomodoroWorkingSession");
+	if (glob_currentActivity == "work" || forceValue == "rest") {
+		glob_currentActivity = "rest";
+		glob_timeLeft = localStorage.getItem("timeForPomodoroRestingSession");
+	} else if (glob_currentActivity == "rest" || forceValue == "work") {
+		glob_currentActivity = "work";
+		glob_timeLeft = localStorage.getItem("timeForPomodoroWorkingSession");
 	}
 }
 
-function updateCurrentSessionMessage(delayInSeconds = 1, status = currentActivity) {
+function updateCurrentSessionMessage(delayInSeconds = 1, status = glob_currentActivity) {
 	setTimeout(function () {
-		//remove text danger class
-		document.getElementById("currentSession").classList.remove("text-red-600");
-		//remove text success class
-		document.getElementById("currentSession").classList.remove("text-green-500");
-
-		document.querySelector(".progressBarValue").style.setProperty("--animationTime", "");
+		resetColorClassesCurrentSession();
 
 		if (status == "rest") {
-			document.getElementById("currentSession").innerHTML = "Resting";
-			document.getElementById("currentSession").classList.add("text-green-500");
-
-			document.querySelector(".progressBarValue").style.setProperty("stroke", "green");
-			document
-				.querySelector(".progressBarValue")
-				.style.setProperty("filter", " drop-shadow(0px 0px 3px rgba(0, 255, 0, 0.7))");
-
-			document.querySelector(".progressBarValue").style.setProperty("--animationTime", timeLeft + "s");
-			document.querySelector(".progressBarValue").style.setProperty("animation", "none");
-			setTimeout(function () {
-				document.querySelector(".progressBarValue").style.setProperty("animation", "");
-			}, 5);
+			updateCurrentTimerTextAndColor("Resting", "text-green-500");
+			updateProgressBarColor("green", "drop-shadow(0px 0px 3px rgba(0, 255, 0, 0.7))");
 		} else if (status == "work") {
-			document.getElementById("currentSession").innerHTML = "Working";
-			document.getElementById("currentSession").classList.add("text-red-600");
-
-			document.querySelector(".progressBarValue").style.setProperty("stroke", "red");
-			document
-				.querySelector(".progressBarValue")
-				.style.setProperty("filter", "drop-shadow(0px 0px 3px rgba(255, 0, 0, 0.7))");
-
-			document.querySelector(".progressBarValue").style.setProperty("--animationTime", timeLeft + "s");
-			document.querySelector(".progressBarValue").style.setProperty("animation", "none");
-			setTimeout(function () {
-				document.querySelector(".progressBarValue").style.setProperty("animation", "");
-			}, 5);
+			updateCurrentTimerTextAndColor("Working", "text-red-600");
+			updateProgressBarColor("red", "drop-shadow(0px 0px 3px rgba(255, 0, 0, 0.7))");
+		} else if (status == "finish") {
+			updateCurrentTimerTextAndColor("Finished", "text-amber-400");
+			updateProgressBarColor("gold", "drop-shadow(0px 0px 3px rgba(255,215,0, 0.7))");
 		} else {
 			//remove style color
-			document.getElementById("currentSession").innerHTML = "N/A";
+			document.getElementById("currentSession").innerHTML = "Done";
 			document.querySelector(".progressBarValue").style.setProperty("--animationTime", "0ms");
 		}
 	}, delayInSeconds * 1000);
 }
 
+function updateCurrentTimerTextAndColor(text, colorClass) {
+	document.getElementById("currentSession").innerHTML = text;
+	document.getElementById("currentSession").classList.add(colorClass);
+}
+
+function resetColorClassesCurrentSession() {
+	//remove text danger class
+	document.getElementById("currentSession").classList.remove("text-red-600");
+	//remove text success class
+	document.getElementById("currentSession").classList.remove("text-green-500");
+	//remove golden text
+	document.getElementById("currentSession").classList.remove("text-amber-400");
+}
+
+function updateProgressBarColor(barColor, barDropShadow, timeValue = glob_timeLeft) {
+	document.querySelector(".progressBarValue").style.setProperty("--animationTime", "");
+
+	document.querySelector(".progressBarValue").style.setProperty("stroke", barColor);
+	document.querySelector(".progressBarValue").style.setProperty("filter", barDropShadow);
+
+	document.querySelector(".progressBarValue").style.setProperty("--animationTime", timeValue + "s");
+	document.querySelector(".progressBarValue").style.setProperty("animation", "none");
+	setTimeout(function () {
+		document.querySelector(".progressBarValue").style.setProperty("animation", "");
+	}, 5);
+}
+
 function playAudio(currentAudioToPlay) {
-	if (currentAudio != null && currentAudio != undefined) {
-		currentAudio.pause();
+	if (glob_currentAudio != null && glob_currentAudio != undefined) {
+		glob_currentAudio.pause();
 	}
 
 	if (currentAudioToPlay == "countdown") {
 		if (localStorage.getItem("audioCountdownPath") != null) {
-			currentAudio = new Audio(localStorage.getItem("audioCountdownPath"));
+			glob_currentAudio = new Audio(localStorage.getItem("audioCountdownPath"));
 		} else {
-			currentAudio = new Audio("assets/audio/countdown.wav");
+			glob_currentAudio = new Audio("assets/audio/countdown.wav");
 		}
 	} else if (currentAudioToPlay == "done") {
-		if (currentActivity == "work") {
+		if (glob_currentActivity == "work") {
 			if (localStorage.getItem("audioAfterWorkFilePath") != null) {
-				currentAudio = new Audio(localStorage.getItem("audioAfterWorkFilePath"));
+				glob_currentAudio = new Audio(localStorage.getItem("audioAfterWorkFilePath"));
 			} else {
-				currentAudio = new Audio("assets/audio/playAfterWork.wav");
+				glob_currentAudio = new Audio("assets/audio/playAfterWork.wav");
 			}
-		} else if (currentActivity == "rest") {
+		} else if (glob_currentActivity == "rest") {
 			if (localStorage.getItem("audioAfterRestFilePath") != null) {
-				currentAudio = new Audio(localStorage.getItem("audioAfterRestFilePath"));
+				glob_currentAudio = new Audio(localStorage.getItem("audioAfterRestFilePath"));
 			} else {
-				currentAudio = new Audio("assets/audio/playAfterRest.wav");
+				glob_currentAudio = new Audio("assets/audio/playAfterRest.wav");
 			}
 		}
 	} else if (currentAudioToPlay == "finish") {
 		if (localStorage.getItem("audioFinishPath") != null) {
-			currentAudio = new Audio(localStorage.getItem("audioFinishPath"));
+			glob_currentAudio = new Audio(localStorage.getItem("audioFinishPath"));
 		} else {
-			currentAudio = new Audio("assets/audio/finish.wav");
+			glob_currentAudio = new Audio("assets/audio/finish.wav");
 		}
 	}
 
 	//audio level set to 100%
-	currentAudio.volume = localStorage.getItem("audioLevelValue") || 1;
-	currentAudio.play();
+	glob_currentAudio.volume = localStorage.getItem("audioLevelValue") || 1;
+	glob_currentAudio.play();
 }
