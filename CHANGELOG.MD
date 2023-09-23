@@ -2,6 +2,8 @@
 
 ## [Unreleased] - ????-??-??
 
+## [1.1.0] - 2023-09-23
+
 ### Added
 
 - Close and minimize to the system tray.

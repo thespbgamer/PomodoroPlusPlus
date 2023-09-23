@@ -21,6 +21,7 @@ function createWindow() {
 		webPreferences: {
 			preload: path.join(__dirname, filesToCall["mainPreload.js"]),
 			nodeIntegration: true,
+			backgroundThrottling: false,
 			devTools: isDev,
 		},
 	});
