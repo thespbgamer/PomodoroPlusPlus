@@ -11,15 +11,20 @@
 			"artifactName": "Pomodoro++.setup.${version}.${ext}",
 			"uninstallDisplayName": "Pomodoro++"
 		},
-		"files": "!build-assets${/*}"
+		"files": "!build-assets${/*}",
+		"extraFiles": [
+			{
+				"from": "./icon.ico",
+				"to": "."
+			}
+		]
 	},
 	"scripts": {
 		"dev": "npx electronmon .",
 		"devOnce": "npx electron-packager .",
 		"watchCSS": "npx tailwindcss -i ./src/assets/css/tailwindImports.css -o ./src/assets/css/tailwind.css --watch",
 		"pack": "electron-builder --dir",
-		"dist": "electron-builder",
-		"package": "npx electron-packager ./"
+		"dist": "electron-builder"
 	},
 	"license": "ISC",
 	"devDependencies": {
