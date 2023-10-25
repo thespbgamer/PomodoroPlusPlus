@@ -83,10 +83,6 @@ ipcMain.handle("dark-mode:get", () => {
 	return nativeTheme.shouldUseDarkColors ? "dark" : nativeTheme.shouldUseSystemColors;
 });
 
-// ipcMain.handle("dark-mode:system", () => {
-// 	nativeTheme.themeSource = "system";
-// });
-
 app.whenReady().then(() => {
 	createWindow();
 

@@ -11,45 +11,45 @@ document.addEventListener("keypress", function (e) {
 	}
 });
 
-document.getElementById("toggle-dark-mode").addEventListener("click", async () => {
-	const isDarkMode = await window.darkMode.toggle();
+document.getElementById("toggle-dark-mode").addEventListener("click", () => {
+	const isDarkMode = window.darkMode.toggle();
 	document.getElementById("bodyColor").setAttribute("data-bs-theme", isDarkMode ? "dark" : "light");
 });
 
-document.getElementById("audioAfterWorkFile").addEventListener("change", async () => {
+document.getElementById("audioAfterWorkFile").addEventListener("change", () => {
 	audioAfterWorkFile = document.getElementById("audioAfterWorkFile").files[0];
 });
 
-document.getElementById("audioAfterRestFile").addEventListener("change", async () => {
+document.getElementById("audioAfterRestFile").addEventListener("change", () => {
 	audioAfterRestFile = document.getElementById("audioAfterRestFile").files[0];
 });
 
-document.getElementById("audioCountDownFile").addEventListener("change", async () => {
+document.getElementById("audioCountDownFile").addEventListener("change", () => {
 	audioCountDownFile = document.getElementById("audioCountDownFile").files[0];
 });
 
-document.getElementById("audioFinishFile").addEventListener("change", async () => {
+document.getElementById("audioFinishFile").addEventListener("change", () => {
 	audioFinishFile = document.getElementById("audioFinishFile").files[0];
 });
 
-document.getElementById("reset-audio-after-work").addEventListener("click", async () => {
-	window.files.copy(null, null, localStorage.getItem("audioAfterWorkFilePath"));
-	localStorage.removeItem("audioAfterWorkFilePath");
+document.getElementById("reset-audio-after-work").addEventListener("click", () => {
+	window.files.copy(null, null, localStorage.getItem("audioWorkPath"));
+	localStorage.removeItem("audioWorkPath");
 	audioAfterWorkFile = null;
 	document.getElementById("audioAfterWorkFile").value = null;
 
 	showAlertAndDismiss("alert-blue-div", "alert-blue-text", "Audio after work reset.", 3000, "blue");
 });
 
-document.getElementById("reset-audio-after-rest").addEventListener("click", async () => {
-	window.files.copy(null, null, localStorage.getItem("audioAfterRestFilePath"));
-	localStorage.removeItem("audioAfterRestFilePath");
+document.getElementById("reset-audio-after-rest").addEventListener("click", () => {
+	window.files.copy(null, null, localStorage.getItem("audioRestPath"));
+	localStorage.removeItem("audioRestPath");
 	audioAfterRestFile = null;
 	document.getElementById("audioAfterRestFile").value = null;
 	showAlertAndDismiss("alert-blue-div", "alert-blue-text", "Audio after rest reset.", 3000, "blue");
 });
 
-document.getElementById("reset-audio-countdown").addEventListener("click", async () => {
+document.getElementById("reset-audio-countdown").addEventListener("click", () => {
 	window.files.copy(null, null, localStorage.getItem("audioCountdownPath"));
 	localStorage.removeItem("audioCountdownPath");
 	audioCountDownFile = null;
@@ -57,7 +57,7 @@ document.getElementById("reset-audio-countdown").addEventListener("click", async
 	showAlertAndDismiss("alert-blue-div", "alert-blue-text", "Audio countdown reset.", 3000, "blue");
 });
 
-document.getElementById("reset-audio-finish").addEventListener("click", async () => {
+document.getElementById("reset-audio-finish").addEventListener("click", () => {
 	window.files.copy(null, null, localStorage.getItem("audioFinishPath"));
 	localStorage.removeItem("audioFinishPath");
 	audioFinishFile = null;
@@ -65,7 +65,7 @@ document.getElementById("reset-audio-finish").addEventListener("click", async ()
 	showAlertAndDismiss("alert-blue-div", "alert-blue-text", "Audio finish reset.", 3000, "blue");
 });
 
-document.getElementById("save-options").addEventListener("click", async () => {
+document.getElementById("save-options").addEventListener("click", () => {
 	try {
 		let timeForPomodoroWorkingSession = document.getElementById("timeForPomodoroWorkingSession").value;
 		let timeForPomodoroRestingSession = document.getElementById("timeForPomodoroRestingSession").value;
@@ -98,21 +98,13 @@ document.getElementById("save-options").addEventListener("click", async () => {
 		localStorage.setItem("audioLevelValue", audioLevelValue / 100);
 
 		if (audioAfterWorkFile != null && audioAfterWorkFile != undefined) {
-			let finalDestination = window.files.copy(
-				audioAfterWorkFile.path,
-				null,
-				localStorage.getItem("audioAfterWorkFilePath")
-			);
-			localStorage.setItem("audioAfterWorkFilePath", finalDestination);
+			let finalDestination = window.files.copy(audioAfterWorkFile.path, null, localStorage.getItem("audioWorkPath"));
+			localStorage.setItem("audioWorkPath", finalDestination);
 		}
 
 		if (audioAfterRestFile != null && audioAfterRestFile != undefined) {
-			let finalDestination = window.files.copy(
-				audioAfterRestFile.path,
-				null,
-				localStorage.getItem("audioAfterRestFilePath")
-			);
-			localStorage.setItem("audioAfterRestFilePath", finalDestination);
+			let finalDestination = window.files.copy(audioAfterRestFile.path, null, localStorage.getItem("audioRestPath"));
+			localStorage.setItem("audioRestPath", finalDestination);
 		}
 
 		if (audioCountDownFile != null && audioCountDownFile != undefined) {
@@ -136,7 +128,7 @@ document.getElementById("save-options").addEventListener("click", async () => {
 	}
 });
 
-window.addEventListener("load", async () => {
+window.addEventListener("load", () => {
 	notificationCount = 0;
 	let timeForPomodoroWorkingSession = localStorage.getItem("timeForPomodoroWorkingSession");
 	let timeForPomodoroRestingSession = localStorage.getItem("timeForPomodoroRestingSession");
@@ -170,33 +162,33 @@ window.addEventListener("load", async () => {
 	convertTimerValues("numberOfSessionsValue", "finalTimeConverted");
 });
 
-document.getElementById("timeForPomodoroWorkingSession").addEventListener("input", async () => {
+document.getElementById("timeForPomodoroWorkingSession").addEventListener("input", () => {
 	convertTimerValues("timeForPomodoroWorkingSession", "timeToWorkConverted");
 	convertTimerValues("numberOfSessionsValue", "finalTimeConverted");
 });
 
-document.getElementById("timeForPomodoroRestingSession").addEventListener("input", async () => {
+document.getElementById("timeForPomodoroRestingSession").addEventListener("input", () => {
 	convertTimerValues("timeForPomodoroRestingSession", "timeToRestConverted");
 	convertTimerValues("numberOfSessionsValue", "finalTimeConverted");
 });
 
-document.getElementById("numberOfSessionsValue").addEventListener("input", async () => {
+document.getElementById("numberOfSessionsValue").addEventListener("input", () => {
 	convertTimerValues("numberOfSessionsValue", "finalTimeConverted");
 });
 
-document.getElementById("play-audio-after-work").addEventListener("click", async () => {
-	playAudio("done", "work");
+document.getElementById("play-audio-after-work").addEventListener("click", () => {
+	playAudio("Done", "Work");
 });
 
-document.getElementById("play-audio-after-rest").addEventListener("click", async () => {
-	playAudio("done", "rest");
+document.getElementById("play-audio-after-rest").addEventListener("click", () => {
+	playAudio("Done", "Rest");
 });
-document.getElementById("play-audio-countdown").addEventListener("click", async () => {
-	playAudio("countdown");
+document.getElementById("play-audio-countdown").addEventListener("click", () => {
+	playAudio("Countdown");
 });
 
-document.getElementById("play-audio-finish").addEventListener("click", async () => {
-	playAudio("finish");
+document.getElementById("play-audio-finish").addEventListener("click", () => {
+	playAudio("Finish");
 });
 
 function convertTimerValues(originalID, convertedID) {
@@ -273,43 +265,18 @@ function playAudio(currentAudioToPlay, currentActivity = "") {
 		currentAudio.pause();
 	}
 
-	if (currentAudioToPlay == "countdown") {
-		if (localStorage.getItem("audioCountdownPath") != null) {
-			currentAudio = new Audio(localStorage.getItem("audioCountdownPath"));
-		} else if (audioCountDownFile != null) {
-			currentAudio = new Audio(audioCountDownFile.path);
-		} else {
-			currentAudio = new Audio("assets/audio/countdown.wav");
-		}
-	} else if (currentAudioToPlay == "done") {
-		if (currentActivity == "work") {
-			if (localStorage.getItem("audioAfterWorkFilePath") != null) {
-				currentAudio = new Audio(localStorage.getItem("audioAfterWorkFilePath"));
-			} else if (audioAfterWorkFile != null) {
-				currentAudio = new Audio(audioAfterWorkFile.path);
-			} else {
-				currentAudio = new Audio("assets/audio/playAfterWork.wav");
-			}
-		} else if (currentActivity == "rest") {
-			if (localStorage.getItem("audioAfterRestFilePath") != null) {
-				currentAudio = new Audio(localStorage.getItem("audioAfterRestFilePath"));
-			} else if (audioAfterRestFile != null) {
-				currentAudio = new Audio(audioAfterRestFile.path);
-			} else {
-				currentAudio = new Audio("assets/audio/playAfterRest.wav");
-			}
-		}
-	} else if (currentAudioToPlay == "finish") {
-		if (localStorage.getItem("audioFinishPath") != null) {
-			currentAudio = new Audio(localStorage.getItem("audioFinishPath"));
-		} else if (audioFinishFile != null) {
-			currentAudio = new Audio(audioFinishFile.path);
-		} else {
-			currentAudio = new Audio("assets/audio/finish.wav");
-		}
-	}
+	// console.log(currentAudioToPlay);
+	// console.log("audio" + currentAudioToPlay + "Path");
 
-	console.log(currentAudio);
+	const audioPath = "audio" + currentAudioToPlay + "Path";
+
+	if (localStorage.getItem(audioPath) != null) {
+		currentAudio = new Audio(audioPath);
+	} else if (currentAudioToPlay == "Done") {
+		currentAudio = new Audio("assets/audio/" + currentActivity + ".wav");
+	} else {
+		currentAudio = new Audio("assets/audio/" + currentAudioToPlay + ".wav");
+	}
 
 	//audio level set to 100%
 	currentAudio.volume = localStorage.getItem("audioLevelValue") || 1;

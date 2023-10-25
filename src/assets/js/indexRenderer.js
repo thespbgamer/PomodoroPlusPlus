@@ -6,23 +6,22 @@ let glob_pomodoroTimerPartsRemaining = -1;
 let glob_currentAudio;
 
 //On page load
-window.addEventListener("load", async () => {
+window.addEventListener("load", () => {
 	//If it's the first time opening the app, redirect to the options
 	if (localStorage.getItem("numberOfSessionsValue") == null || localStorage.getItem("numberOfSessionsValue") < 1) {
 		window.location.replace("options.html");
 	}
-
 	//Get the number of sessions and save it
 	glob_numberOfSessions = localStorage.getItem("numberOfSessionsValue");
 });
 
 //When you click the start button
-document.getElementById("startButton").addEventListener("click", async () => {
+document.getElementById("startButton").addEventListener("click", () => {
 	//Calculate the number of pomodoro timers remaining
 	glob_pomodoroTimerPartsRemaining = glob_numberOfSessions * 2;
 
-	//Force the current activity to "work"
-	toggleCurrentActivityAndTimeLeft("work");
+	//Force the current activity to "Work"
+	toggleCurrentActivityAndTimeLeft("Work");
 
 	//Start the countdown
 	startCountdown();
@@ -37,8 +36,8 @@ function startCountdown() {
 
 	//If no more timers, define the pomodoro with "Finished", and re-enable the start button
 	if (glob_pomodoroTimerPartsRemaining < 0) {
-		updateCurrentSessionMessage(0, "finish");
-		toggleCurrentActivityAndTimeLeft("rest");
+		updateCurrentSessionMessage(0, "Finish");
+		toggleCurrentActivityAndTimeLeft("Rest");
 		return;
 	}
 
@@ -48,18 +47,18 @@ function startCountdown() {
 
 	// console.log(glob_timeLeft);
 
-	var currentPartTimer = setInterval(function () {
+	const currentPartTimer = setInterval(function () {
 		//format mm:ss with allwas 2 digits
-		document.getElementById("countdown").innerHTML =
+		document.getElementById("Countdown").innerHTML =
 			("0" + Math.floor(glob_timeLeft / 60)).slice(-2) + ":" + ("0" + (glob_timeLeft % 60)).slice(-2);
 		glob_timeLeft -= 1;
 		if (glob_timeLeft < 0) {
 			if (glob_pomodoroTimerPartsRemaining == 0) {
-				document.getElementById("countdown").innerHTML = "Congratulations";
-				playAudio("finish");
+				document.getElementById("Countdown").innerHTML = "Congratulations";
+				playAudio("Finish");
 			} else {
-				document.getElementById("countdown").innerHTML = "Next part is Starting";
-				playAudio("done");
+				document.getElementById("Countdown").innerHTML = "Next part is Starting";
+				playAudio("Done");
 			}
 			clearInterval(currentPartTimer);
 
@@ -71,17 +70,17 @@ function startCountdown() {
 		if (glob_timeLeft < 3 && !hasCountdownStarted) {
 			hasCountdownStarted = true;
 			//play wav file
-			playAudio("countdown");
+			playAudio("Countdown");
 		}
 	}, 1000);
 }
 
 function toggleCurrentActivityAndTimeLeft(forceValue = null) {
-	if (glob_currentActivity == "work" || forceValue == "rest") {
-		glob_currentActivity = "rest";
+	if (glob_currentActivity == "Work" || forceValue == "Rest") {
+		glob_currentActivity = "Rest";
 		glob_timeLeft = localStorage.getItem("timeForPomodoroRestingSession");
-	} else if (glob_currentActivity == "rest" || forceValue == "work") {
-		glob_currentActivity = "work";
+	} else if (glob_currentActivity == "Rest" || forceValue == "Work") {
+		glob_currentActivity = "Work";
 		glob_timeLeft = localStorage.getItem("timeForPomodoroWorkingSession");
 	}
 }
@@ -90,13 +89,13 @@ function updateCurrentSessionMessage(delayInSeconds = 1, status = glob_currentAc
 	setTimeout(function () {
 		resetColorClassesCurrentSession();
 
-		if (status == "rest") {
+		if (status == "Rest") {
 			updateCurrentTimerTextAndColor("Resting", "text-green-500");
 			updateProgressBarColor("green", "drop-shadow(0px 0px 3px rgba(0, 255, 0, 0.7))");
-		} else if (status == "work") {
+		} else if (status == "Work") {
 			updateCurrentTimerTextAndColor("Working", "text-red-600");
 			updateProgressBarColor("red", "drop-shadow(0px 0px 3px rgba(255, 0, 0, 0.7))");
-		} else if (status == "finish") {
+		} else if (status == "Finish") {
 			updateCurrentTimerTextAndColor("Finished", "text-amber-400");
 			updateProgressBarColor("gold", "drop-shadow(0px 0px 3px rgba(255,215,0, 0.7))");
 		} else {
@@ -139,32 +138,17 @@ function playAudio(currentAudioToPlay) {
 		glob_currentAudio.pause();
 	}
 
-	if (currentAudioToPlay == "countdown") {
-		if (localStorage.getItem("audioCountdownPath") != null) {
-			glob_currentAudio = new Audio(localStorage.getItem("audioCountdownPath"));
-		} else {
-			glob_currentAudio = new Audio("assets/audio/countdown.wav");
-		}
-	} else if (currentAudioToPlay == "done") {
-		if (glob_currentActivity == "work") {
-			if (localStorage.getItem("audioAfterWorkFilePath") != null) {
-				glob_currentAudio = new Audio(localStorage.getItem("audioAfterWorkFilePath"));
-			} else {
-				glob_currentAudio = new Audio("assets/audio/playAfterWork.wav");
-			}
-		} else if (glob_currentActivity == "rest") {
-			if (localStorage.getItem("audioAfterRestFilePath") != null) {
-				glob_currentAudio = new Audio(localStorage.getItem("audioAfterRestFilePath"));
-			} else {
-				glob_currentAudio = new Audio("assets/audio/playAfterRest.wav");
-			}
-		}
-	} else if (currentAudioToPlay == "finish") {
-		if (localStorage.getItem("audioFinishPath") != null) {
-			glob_currentAudio = new Audio(localStorage.getItem("audioFinishPath"));
-		} else {
-			glob_currentAudio = new Audio("assets/audio/finish.wav");
-		}
+	// console.log(currentAudioToPlay);
+	// console.log("audio" + currentAudioToPlay + "Path");
+
+	const audioPath = "audio" + currentAudioToPlay + "Path";
+
+	if (localStorage.getItem(audioPath) != null) {
+		glob_currentAudio = new Audio(audioPath);
+	} else if (currentAudioToPlay == "Done") {
+		glob_currentAudio = new Audio("assets/audio/" + glob_currentActivity + ".wav");
+	} else {
+		glob_currentAudio = new Audio("assets/audio/" + currentAudioToPlay + ".wav");
 	}
 
 	//audio level set to 100%
