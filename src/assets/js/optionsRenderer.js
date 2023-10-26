@@ -177,18 +177,18 @@ document.getElementById("numberOfSessionsValue").addEventListener("input", () =>
 });
 
 document.getElementById("play-audio-after-work").addEventListener("click", () => {
-	playAudio("Done", "Work");
+	playAudio("Done", "Work", audioAfterWorkFile?.path);
 });
 
 document.getElementById("play-audio-after-rest").addEventListener("click", () => {
-	playAudio("Done", "Rest");
+	playAudio("Done", "Rest", audioAfterRestFile?.path);
 });
 document.getElementById("play-audio-countdown").addEventListener("click", () => {
-	playAudio("Countdown");
+	playAudio("Countdown", null, audioCountDownFile?.path);
 });
 
 document.getElementById("play-audio-finish").addEventListener("click", () => {
-	playAudio("Finish");
+	playAudio("Finish", null, audioFinishFile?.path);
 });
 
 function convertTimerValues(originalID, convertedID) {
@@ -260,18 +260,20 @@ function convertTimerValues(originalID, convertedID) {
 
 let currentAudio;
 
-function playAudio(currentAudioToPlay, currentActivity = "") {
+function playAudio(currentAudioToPlay, currentActivity = "", audioOverwrite = null) {
 	if (currentAudio != null && currentAudio != undefined) {
 		currentAudio.pause();
 	}
 
-	// console.log(currentAudioToPlay);
-	// console.log("audio" + currentAudioToPlay + "Path");
+	const audioName = !currentActivity ? currentAudioToPlay : currentActivity;
 
-	const audioPath = "audio" + currentAudioToPlay + "Path";
+	const audioPath = "audio" + audioName + "Path";
+	// console.log(audioPath);
 
-	if (localStorage.getItem(audioPath) != null) {
-		currentAudio = new Audio(audioPath);
+	if (audioOverwrite) {
+		currentAudio = new Audio(audioOverwrite);
+	} else if (localStorage.getItem(audioPath) != null) {
+		currentAudio = new Audio(localStorage.getItem(audioPath));
 	} else if (currentAudioToPlay == "Done") {
 		currentAudio = new Audio("assets/audio/" + currentActivity + ".wav");
 	} else {

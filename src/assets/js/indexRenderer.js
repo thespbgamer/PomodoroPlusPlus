@@ -137,14 +137,12 @@ function playAudio(currentAudioToPlay) {
 	if (glob_currentAudio != null && glob_currentAudio != undefined) {
 		glob_currentAudio.pause();
 	}
+	const audioName = currentAudioToPlay != "Done" ? currentAudioToPlay : glob_currentActivity;
 
-	// console.log(currentAudioToPlay);
-	// console.log("audio" + currentAudioToPlay + "Path");
-
-	const audioPath = "audio" + currentAudioToPlay + "Path";
+	const audioPath = "audio" + audioName + "Path";
 
 	if (localStorage.getItem(audioPath) != null) {
-		glob_currentAudio = new Audio(audioPath);
+		glob_currentAudio = new Audio(localStorage.getItem(audioPath));
 	} else if (currentAudioToPlay == "Done") {
 		glob_currentAudio = new Audio("assets/audio/" + glob_currentActivity + ".wav");
 	} else {
