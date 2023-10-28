@@ -45,8 +45,6 @@ function startCountdown() {
 	document.getElementById("startButton").setAttribute("disabled", "disabled");
 	updateCurrentSessionMessage();
 
-	// console.log(glob_timeLeft);
-
 	const currentPartTimer = setInterval(function () {
 		//format mm:ss with allwas 2 digits
 		document.getElementById("Countdown").innerHTML =

@@ -71,9 +71,6 @@ document.getElementById("save-options").addEventListener("click", () => {
 		let timeForPomodoroRestingSession = document.getElementById("timeForPomodoroRestingSession").value;
 		let numberOfSessionsValue = document.getElementById("numberOfSessionsValue").value;
 		let audioLevelValue = document.getElementById("audioLevelValue").value;
-		// if (parseInt(numberOfSessionsValue == null || numberOfSessionsValue) < 1) {
-		// 	numberOfSessionsValue = 1;
-		// }
 
 		if (
 			timeForPomodoroWorkingSession == "" ||
@@ -123,7 +120,6 @@ document.getElementById("save-options").addEventListener("click", () => {
 
 		showAlertAndDismiss("alert-green-div", "alert-green-text", "Options Saved!", 3000, "green");
 	} catch (err) {
-		//console.log(err);
 		showAlertAndDismiss("alert-red-div", "alert-red-text", err, 3000, "red");
 	}
 });
@@ -194,7 +190,7 @@ document.getElementById("play-audio-finish").addEventListener("click", () => {
 function convertTimerValues(originalID, convertedID) {
 	let timeForPomodoroWorkingSession = document.getElementById(originalID).value;
 
-	if (timeForPomodoroWorkingSession == "") {
+	if (timeForPomodoroWorkingSession == "" || timeForPomodoroWorkingSession.length == 0) {
 		document.getElementById(convertedID).innerHTML = "N/A";
 		return;
 	} else if (convertedID == "finalTimeConverted") {
@@ -213,49 +209,19 @@ function convertTimerValues(originalID, convertedID) {
 	//get remaining seconds
 	let secondsLeft = timeForPomodoroWorkingSession % 60;
 
-	let timeForPomodoroWorkingSessionConvertedInnerHTML = "";
-
-	let isFirst = true;
-
-	//if hours is greater than 1
-	if (hoursLeft > 1) {
-		timeForPomodoroWorkingSessionConvertedInnerHTML += hoursLeft + " hours ";
-		isFirst = false;
+	// Padding the values to ensure they are two digits
+	if (hoursLeft < 10) {
+		hoursLeft = "0" + hoursLeft;
 	}
-	if (hoursLeft == 1) {
-		timeForPomodoroWorkingSessionConvertedInnerHTML += hoursLeft + " hour ";
-		isFirst = false;
+	if (minutesLeft < 10) {
+		minutesLeft = "0" + minutesLeft;
 	}
-	if (minutesLeft > 1) {
-		if (!isFirst) {
-			timeForPomodoroWorkingSessionConvertedInnerHTML += " and ";
-		}
-
-		timeForPomodoroWorkingSessionConvertedInnerHTML += minutesLeft + " mins ";
-	}
-	if (minutesLeft == 1) {
-		if (!isFirst) {
-			timeForPomodoroWorkingSessionConvertedInnerHTML += " and ";
-		}
-
-		timeForPomodoroWorkingSessionConvertedInnerHTML += minutesLeft + " min ";
-	}
-	if (secondsLeft > 1) {
-		if (!isFirst) {
-			timeForPomodoroWorkingSessionConvertedInnerHTML += " and ";
-		}
-
-		timeForPomodoroWorkingSessionConvertedInnerHTML += secondsLeft + " secs ";
-	}
-	if (secondsLeft == 1) {
-		if (!isFirst) {
-			timeForPomodoroWorkingSessionConvertedInnerHTML += " and ";
-		}
-
-		timeForPomodoroWorkingSessionConvertedInnerHTML += secondsLeft + " sec ";
+	if (secondsLeft < 10) {
+		secondsLeft = "0" + secondsLeft;
 	}
 
-	document.getElementById(convertedID).innerHTML = timeForPomodoroWorkingSessionConvertedInnerHTML;
+	document.getElementById(convertedID).innerHTML =
+		secondsLeft >= 0 ? hoursLeft + ":" + minutesLeft + ":" + secondsLeft : "N/A";
 }
 
 let currentAudio;
@@ -268,7 +234,6 @@ function playAudio(currentAudioToPlay, currentActivity = "", audioOverwrite = nu
 	const audioName = !currentActivity ? currentAudioToPlay : currentActivity;
 
 	const audioPath = "audio" + audioName + "Path";
-	// console.log(audioPath);
 
 	if (audioOverwrite) {
 		currentAudio = new Audio(audioOverwrite);
