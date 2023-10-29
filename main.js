@@ -8,7 +8,7 @@ const isDev = process.env.NODE_ENV == "development";
 
 const filesToCall = {
 	"mainPreload.js": "./src/assets/js/globalPreload.js",
-	"mainIndex.js": "./src/index.html",
+	"mainIndex.js": "./src/index.html"
 };
 
 function createWindow() {
@@ -22,8 +22,8 @@ function createWindow() {
 			preload: path.join(__dirname, filesToCall["mainPreload.js"]),
 			nodeIntegration: true,
 			backgroundThrottling: false,
-			devTools: isDev,
-		},
+			devTools: isDev
+		}
 	});
 
 	win.on("minimize", function (event) {
@@ -50,7 +50,7 @@ function createWindow() {
 			label: "Show",
 			click: () => {
 				win.show();
-			},
+			}
 		},
 		{
 			label: "Quit",
@@ -58,8 +58,8 @@ function createWindow() {
 				app.isQuiting = true;
 				app.quit();
 				functionQuit();
-			},
-		},
+			}
+		}
 	]);
 	tray.setToolTip("Pomodoro++");
 	tray.setContextMenu(contextMenu);

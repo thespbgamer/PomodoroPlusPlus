@@ -4,7 +4,7 @@ const path = require("path");
 
 contextBridge.exposeInMainWorld("darkMode", {
 	toggle: () => ipcRenderer.invoke("dark-mode:toggle"),
-	get: () => ipcRenderer.invoke("dark-mode:get"),
+	get: () => ipcRenderer.invoke("dark-mode:get")
 	// system: () => ipcRenderer.invoke("dark-mode:system"),
 });
 
@@ -42,5 +42,5 @@ contextBridge.exposeInMainWorld("files", {
 	},
 	doesExist: (filename) => {
 		return fs.existsSync(process.env.APPDATA + "\\PomodoroPlusPlus\\Data\\" + filename);
-	},
+	}
 });

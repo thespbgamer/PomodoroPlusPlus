@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 	<head>
 		<meta charset="UTF-8" />
@@ -9,16 +9,16 @@
 		<link rel="stylesheet" type="text/css" href="./assets/css/tailwind.css" />
 	</head>
 	<body id="bodyColor" data-bs-theme="dark">
-		<h1 class="text-6xl font-bold underline text-center unselectable">Options Menu</h1>
+		<h1 class="unselectable text-center text-6xl font-bold underline">Options Menu</h1>
 		<div class="mt-2 pr-2">
 			<br class="unselectable" />
 			<form onsubmit="return false;">
 				<label
 					for="input-group-workingSessions"
-					class="ml-3 block mb-2 text-sm font-medium text-gray-900 dark:text-white unselectable"
+					class="unselectable mb-2 ml-3 block text-sm font-medium text-gray-900 dark:text-white"
 					>Time to Work (in seconds)</label
 				>
-				<div class="relative ml-3 mb-6">
+				<div class="relative mb-6 ml-3">
 					<input
 						id="timeForPomodoroWorkingSession"
 						placeholder="Time to work in seconds"
@@ -27,10 +27,10 @@
 						required
 						type="number"
 						id="input-group-workingSessions"
-						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:dark:bg-gray-800 dark:border-gray-900 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+						class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-900 dark:dark:bg-gray-800 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
 					/>
 					<div
-						class="max-[350px]:invisible min-[350px]:visible absolute inset-y-0 right-0 flex items-center pr-3.5 pointer-events-none"
+						class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3.5 max-[350px]:invisible min-[350px]:visible"
 					>
 						<span class="unselectable" id="timeToWorkConverted">N/A</span>
 					</div>
@@ -38,10 +38,10 @@
 
 				<label
 					for="input-group-restingSessions"
-					class="ml-3 block mb-2 text-sm font-medium text-gray-900 dark:text-white unselectable"
+					class="unselectable mb-2 ml-3 block text-sm font-medium text-gray-900 dark:text-white"
 					>Time to Rest (in seconds)</label
 				>
-				<div class="relative ml-3 mb-6">
+				<div class="relative mb-6 ml-3">
 					<input
 						id="timeForPomodoroRestingSession"
 						placeholder="Time to rest in seconds"
@@ -50,10 +50,10 @@
 						required
 						type="number"
 						id="input-group-restingSessions"
-						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:dark:bg-gray-800 dark:border-gray-900 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+						class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-900 dark:dark:bg-gray-800 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
 					/>
 					<div
-						class="max-[350px]:invisible min-[350px]:visible absolute inset-y-0 right-0 flex items-center pr-3.5 pointer-events-none"
+						class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3.5 max-[350px]:invisible min-[350px]:visible"
 					>
 						<span class="unselectable" id="timeToRestConverted">N/A</span>
 					</div>
@@ -61,10 +61,10 @@
 
 				<label
 					for="input-group-numberSessions"
-					class="ml-3 block mb-2 text-sm font-medium text-gray-900 dark:text-white unselectable"
+					class="unselectable mb-2 ml-3 block text-sm font-medium text-gray-900 dark:text-white"
 					>Number of Sessions</label
 				>
-				<div class="relative ml-3 mb-6">
+				<div class="relative mb-6 ml-3">
 					<input
 						id="numberOfSessionsValue"
 						placeholder="Number of Sessions"
@@ -73,10 +73,10 @@
 						required
 						type="number"
 						id="input-group-numberSessions"
-						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:dark:bg-gray-800 dark:border-gray-900 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+						class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-900 dark:dark:bg-gray-800 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
 					/>
 					<div
-						class="max-[350px]:invisible min-[350px]:visible absolute inset-y-0 right-0 flex items-center pr-3.5 pointer-events-none"
+						class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3.5 max-[350px]:invisible min-[350px]:visible"
 					>
 						<span class="unselectable" id="finalTimeConverted">N/A</span>
 					</div>
@@ -84,10 +84,10 @@
 
 				<label
 					for="input-group-audioLevels"
-					class="ml-3 block mb-2 text-sm font-medium text-gray-900 dark:text-white unselectable"
+					class="unselectable mb-2 ml-3 block text-sm font-medium text-gray-900 dark:text-white"
 					>Audio Levels (%)</label
 				>
-				<div class="relative ml-3 mb-6">
+				<div class="relative mb-6 ml-3">
 					<input
 						id="audioLevelValue"
 						placeholder="Audio Levels (%)"
@@ -96,7 +96,7 @@
 						required
 						type="number"
 						id="input-group-audioLevels"
-						class="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 dark:dark:bg-gray-800 dark:border-gray-900 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
+						class="block w-full rounded-lg border border-gray-300 bg-gray-50 p-2.5 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500 dark:border-gray-900 dark:dark:bg-gray-800 dark:text-white dark:placeholder-gray-400 dark:focus:border-blue-500 dark:focus:ring-blue-500"
 					/>
 				</div>
 
@@ -106,123 +106,123 @@
 						<input type="number" min="0" max="100" id="audioLevelValue" required class="form-control" />
 					</div>
 				</div> -->
-				<div class="ml-2 w-full grid sm:grid-cols-1 md:grid-cols-2 mb-2 unselectable">
+				<div class="unselectable mb-2 ml-2 grid w-full sm:grid-cols-1 md:grid-cols-2">
 					<div class="ml-2 mr-2">
-						<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input"
+						<label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white" for="file_input"
 							>Audio After Work</label
 						>
 						<input
 							id="audioAfterWorkFile"
 							type="file"
 							accept=".mp3,.wav"
-							class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+							class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:placeholder-gray-400"
 						/>
 						<div class="mt-2 flex justify-center">
 							<button
 								id="reset-audio-after-work"
-								class="mx-1 px-3 py-2 mb-1 text-xs font-medium text-center rounded-lg focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+								class="mx-1 mb-1 rounded-lg bg-purple-700 px-3 py-2 text-center text-xs font-medium text-white hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
 							>
 								<i class="bi bi-arrow-counterclockwise"></i>
 							</button>
 							<button
 								id="play-audio-after-work"
-								class="mx-1 px-3 py-2 mb-1 text-xs font-medium text-center rounded-lg focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+								class="mx-1 mb-1 rounded-lg bg-green-700 px-3 py-2 text-center text-xs font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
 							>
 								<i class="bi bi-play-fill"></i>
 							</button>
 						</div>
 					</div>
 					<div class="ml-2 mr-2">
-						<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input"
+						<label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white" for="file_input"
 							>Audio After Rest</label
 						>
 						<input
 							id="audioAfterRestFile"
 							type="file"
 							accept=".mp3,.wav"
-							class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+							class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:placeholder-gray-400"
 						/>
 						<div class="mt-2 flex justify-center">
 							<button
 								id="reset-audio-after-rest"
-								class="mx-1 px-3 py-2 mb-1 text-xs font-medium text-center rounded-lg focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+								class="mx-1 mb-1 rounded-lg bg-purple-700 px-3 py-2 text-center text-xs font-medium text-white hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
 							>
 								<i class="bi bi-arrow-counterclockwise"></i>
 							</button>
 							<button
 								id="play-audio-after-rest"
-								class="mx-1 px-3 py-2 mb-1 text-xs font-medium text-center rounded-lg focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+								class="mx-1 mb-1 rounded-lg bg-green-700 px-3 py-2 text-center text-xs font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
 							>
 								<i class="bi bi-play-fill"></i>
 							</button>
 						</div>
 					</div>
 				</div>
-				<div class="mt-5 ml-2 w-full grid sm:grid-cols-1 md:grid-cols-2 mb-2 unselectable">
+				<div class="unselectable mb-2 ml-2 mt-5 grid w-full sm:grid-cols-1 md:grid-cols-2">
 					<div class="ml-2 mr-2">
-						<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input"
+						<label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white" for="file_input"
 							>Audio Countdown (3 seconds)</label
 						>
 						<input
 							id="audioCountDownFile"
 							type="file"
 							accept=".mp3,.wav"
-							class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+							class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:placeholder-gray-400"
 						/>
 						<div class="mt-2 flex justify-center">
 							<button
 								id="reset-audio-countdown"
-								class="mx-1 px-3 py-2 mb-1 text-xs font-medium text-center rounded-lg focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+								class="mx-1 mb-1 rounded-lg bg-purple-700 px-3 py-2 text-center text-xs font-medium text-white hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
 							>
 								<i class="bi bi-arrow-counterclockwise"></i>
 							</button>
 							<button
 								id="play-audio-countdown"
-								class="mx-1 px-3 py-2 mb-1 text-xs font-medium text-center rounded-lg focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+								class="mx-1 mb-1 rounded-lg bg-green-700 px-3 py-2 text-center text-xs font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
 							>
 								<i class="bi bi-play-fill"></i>
 							</button>
 						</div>
 					</div>
 					<div class="ml-2 mr-2">
-						<label class="block mb-2 text-sm font-medium text-gray-900 dark:text-white" for="file_input"
+						<label class="mb-2 block text-sm font-medium text-gray-900 dark:text-white" for="file_input"
 							>Audio Finish</label
 						>
 						<input
 							id="audioFinishFile"
 							type="file"
 							accept=".mp3,.wav"
-							class="block w-full text-sm text-gray-900 border border-gray-300 rounded-lg cursor-pointer bg-gray-50 dark:text-gray-400 focus:outline-none dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400"
+							class="block w-full cursor-pointer rounded-lg border border-gray-300 bg-gray-50 text-sm text-gray-900 focus:outline-none dark:border-gray-600 dark:bg-gray-700 dark:text-gray-400 dark:placeholder-gray-400"
 						/>
 						<div class="mt-2 flex justify-center">
 							<button
 								id="reset-audio-finish"
-								class="mx-1 px-3 py-2 mb-1 text-xs font-medium text-center rounded-lg focus:outline-none text-white bg-purple-700 hover:bg-purple-800 focus:ring-4 focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
+								class="mx-1 mb-1 rounded-lg bg-purple-700 px-3 py-2 text-center text-xs font-medium text-white hover:bg-purple-800 focus:outline-none focus:ring-4 focus:ring-purple-300 dark:bg-purple-600 dark:hover:bg-purple-700 dark:focus:ring-purple-900"
 							>
 								<i class="bi bi-arrow-counterclockwise"></i>
 							</button>
 							<button
 								id="play-audio-finish"
-								class="mx-1 px-3 py-2 mb-1 text-xs font-medium text-center rounded-lg focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
+								class="mx-1 mb-1 rounded-lg bg-green-700 px-3 py-2 text-center text-xs font-medium text-white hover:bg-green-800 focus:outline-none focus:ring-4 focus:ring-green-300 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800"
 							>
 								<i class="bi bi-play-fill"></i>
 							</button>
 						</div>
 					</div>
 				</div>
-				<div class="mt-8 grid place-items-center unselectable">
+				<div class="unselectable mt-8 grid place-items-center">
 					<button
 						type="submit"
 						id="save-options"
-						class="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-lg px-10 py-5 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+						class="rounded-lg bg-blue-700 px-10 py-5 text-lg font-medium text-white hover:bg-blue-800 focus:outline-none focus:ring-4 focus:ring-blue-300 dark:bg-blue-600 dark:hover:bg-blue-700 dark:focus:ring-blue-800"
 					>
 						<i class="bi bi-save mr-1"></i> Save Options
 					</button>
 				</div>
-				<div class="grid place-items-end mb-24">
+				<div class="mb-24 grid place-items-end">
 					<button
 						id="toggle-dark-mode"
-						class="py-2 px-2 text-sm font-medium text-gray-900 focus:outline-none bg-white rounded-full border border-gray-200 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 dark:bg-gray-800 dark:text-gray-400 dark:border-gray-600 dark:hover:text-white dark:hover:bg-gray-700"
+						class="rounded-full border border-gray-200 bg-white px-2 py-2 text-sm font-medium text-gray-900 hover:bg-gray-100 hover:text-blue-700 focus:z-10 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:border-gray-600 dark:bg-gray-800 dark:text-gray-400 dark:hover:bg-gray-700 dark:hover:text-white dark:focus:ring-gray-700"
 					>
 						<i class="bi bi-circle-half"></i>
 					</button>
@@ -232,25 +232,25 @@
 			<div id="notificationArea"></div>
 
 			<div
-				class="fixed bottom-0 left-0 z-50 w-full h-20 border-t bg-neutral-100 border-neutral-200 dark:bg-gray-700 dark:border-gray-900"
+				class="fixed bottom-0 left-0 z-50 h-20 w-full border-t border-neutral-200 bg-neutral-100 dark:border-gray-900 dark:bg-gray-700"
 			>
-				<div class="grid h-full max-w-lg grid-cols-2 mx-auto font-medium unselectable">
+				<div class="unselectable mx-auto grid h-full max-w-lg grid-cols-2 font-medium">
 					<button
 						type="button"
-						class="ease-in-out duration-300 inline-flex flex-col items-center justify-center disabled:bg-yellow-800 disabled:hover:bg-yellow-900 dark:disabled:hover:bg-yellow-900 disabled:cursor-not-allowed hover:bg-yellow-200 dark:hover:bg-yellow-600 group"
+						class="group inline-flex flex-col items-center justify-center duration-300 ease-in-out hover:bg-yellow-200 disabled:cursor-not-allowed disabled:bg-yellow-800 disabled:hover:bg-yellow-900 dark:hover:bg-yellow-600 dark:disabled:hover:bg-yellow-900"
 						onclick="location.href = 'index.html'"
 					>
 						<i
-							class="bi bi-house-fill ease-in-out duration-500 text-2xl group-hover:text-3xl text-yellow-500 group-hover:text-yellow-500 dark:text-yellow-500 dark:group-hover:text-yellow-400"
+							class="bi bi-house-fill text-2xl text-yellow-500 duration-500 ease-in-out group-hover:text-3xl group-hover:text-yellow-500 dark:text-yellow-500 dark:group-hover:text-yellow-400"
 						></i>
 						<span
-							class="ease-in-out duration-500 text-xl group-hover:text-2xl text-yellow-500 group-hover:text-yellow-500 dark:text-yellow-400 dark:group-hover:text-yellow-300"
+							class="text-xl text-yellow-500 duration-500 ease-in-out group-hover:text-2xl group-hover:text-yellow-500 dark:text-yellow-400 dark:group-hover:text-yellow-300"
 							>Home</span
 						>
 					</button>
 					<button
 						type="button"
-						class="ease-in-out duration-300 inline-flex flex-col items-center justify-center disabled:bg-yellow-800 disabled:hover:bg-yellow-900 dark:disabled:hover:bg-yellow-900 disabled:cursor-not-allowed hover:bg-yellow-200 dark:hover:bg-yellow-600 group"
+						class="group inline-flex flex-col items-center justify-center duration-300 ease-in-out hover:bg-yellow-200 disabled:cursor-not-allowed disabled:bg-yellow-800 disabled:hover:bg-yellow-900 dark:hover:bg-yellow-600 dark:disabled:hover:bg-yellow-900"
 						onclick="location.href = 'options.html'"
 						disabled
 					>
