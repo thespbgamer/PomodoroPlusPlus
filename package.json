@@ -1,6 +1,6 @@
 {
 	"name": "pomodoroplusplus",
-	"version": "1.1.0",
+	"version": "1.2.0",
 	"description": "File that makes it simples to do a customized pomodoro.",
 	"main": "main.js",
 	"author": "thespbgamer",
@@ -29,12 +29,12 @@
 	},
 	"license": "ISC",
 	"devDependencies": {
-		"electron": "^27.0.2",
+		"electron": "^27.0.4",
 		"electron-builder": "^24.6.4",
 		"electron-packager": "^17.1.2",
 		"electronmon": "^2.0.2",
 		"prettier": "^3.0.3",
-		"prettier-plugin-tailwindcss": "^0.5.6",
+		"prettier-plugin-tailwindcss": "^0.5.7",
 		"tailwindcss": "^3.3.5"
 	},
 	"dependencies": {

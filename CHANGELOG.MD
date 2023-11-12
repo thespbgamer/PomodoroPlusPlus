@@ -2,6 +2,16 @@
 
 ## [Unreleased] - ????-??-??
 
+### Updated
+
+- Dependencies
+- Major logic optimizations
+- More accurate timer
+
+### Fixed
+
+- Missing Assets (App & System Tray icons)
+
 ## [1.1.0] - 2023-09-23
 
 ### Added
