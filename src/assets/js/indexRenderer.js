@@ -7,8 +7,6 @@ let glob_currentAudio;
 
 //On page load
 window.addEventListener("load", () => {
-	//const db = window.databaseOperations.openDatabase();
-
 	//If it's the first time opening the app, redirect to the options
 	if (localStorage.getItem("numberOfSessionsValue") == null || localStorage.getItem("numberOfSessionsValue") < 1) {
 		window.location.replace("options.html");

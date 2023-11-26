@@ -1,23 +1,6 @@
 const { contextBridge, ipcRenderer } = require("electron");
 const fs = require("fs");
 const path = require("path");
-const sqlite3 = require("sqlite3");
-const { open } = require("sqlite");
-
-let database;
-
-contextBridge.exposeInMainWorld("databaseOperations", {
-	openDatabase: () => {
-		if (!database) {
-			database = open({
-				filename: process.env.APPDATA + "\\PomodoroPlusPlus\\Data\\database.db",
-				driver: sqlite3.cached.Database
-			});
-		}
-
-		return database;
-	}
-});
 
 //file management
 contextBridge.exposeInMainWorld("files", {
