@@ -1,6 +1,6 @@
 {
 	"name": "pomodoroplusplus",
-	"version": "1.2.0",
+	"version": "1.2.1",
 	"description": "File that makes it simples to do a customized pomodoro.",
 	"main": "main.js",
 	"author": "thespbgamer",
